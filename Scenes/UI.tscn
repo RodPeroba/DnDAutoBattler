@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://l7sed51cwq85"]
+
+[ext_resource type="Script" uid="uid://cpyemaaxo05fl" path="res://Scripts/battleInterface.gd" id="1_w371h"]
+
+[node name="Control" type="Control" unique_id=208033899]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=936422633]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -172.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ItemList" type="ItemList" parent="Panel" unique_id=873269466]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_right = 5.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+allow_reselect = true
+allow_rmb_select = true
+allow_search = false
+auto_width = true
+auto_height = true
+max_columns = 5
+same_column_width = true
+fixed_column_width = 120
+icon_mode = 0
+fixed_icon_size = Vector2i(120, 120)
+script = ExtResource("1_w371h")
