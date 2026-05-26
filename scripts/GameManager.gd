@@ -2,6 +2,9 @@ extends Node
 
 var characters : Array[BaseCharacter] = []
 
+func _ready() -> void:
+	set_up_battle_interface(characters)
+
 func register_character(character : BaseCharacter):
 	characters.append(character)
 
@@ -37,3 +40,8 @@ func isPositionOccupied(pos : Vector2i) -> bool:
 		if character.position == pos and character.currentHp > 0:
 			return true
 	return false
+
+
+func set_up_battle_interface(party:Array[BaseCharacter])->void:
+	#TODO
+	print("BattleInterface has been setup.")

@@ -1,7 +1,7 @@
 extends Node2D
 
 var character_array: Array[CharacterBody2D]
-var warrior = preload("res://warrior_scene.tscn") 
+var warrior = preload("res://Scenes/warrior_scene.tscn") 
 
 @export var inv: Inv
 @export var item: InvItem

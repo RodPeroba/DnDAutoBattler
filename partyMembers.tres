@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="PartyMembers" format=3 uid="uid://d4lqed0h3i502"]
+
+[ext_resource type="Script" uid="uid://dh6lchvblitvt" path="res://Scripts/partyMembers.gd" id="1_rp3da"]
+[ext_resource type="Script" uid="uid://toodrbpf1ns7" path="res://inventory/inventory_item.gd" id="2_fcwdk"]
+[ext_resource type="Texture2D" uid="uid://c75jrp57x4wfs" path="res://icon.svg" id="3_lqmq4"]
+
+[sub_resource type="Resource" id="Resource_etyh1"]
+script = ExtResource("2_fcwdk")
+name = "Fulano"
+texture = ExtResource("3_lqmq4")
+metadata/_custom_type_script = "uid://toodrbpf1ns7"
+
+[sub_resource type="Resource" id="Resource_xmdgj"]
+script = ExtResource("2_fcwdk")
+name = "Ciclano"
+texture = ExtResource("3_lqmq4")
+metadata/_custom_type_script = "uid://toodrbpf1ns7"
+
+[resource]
+script = ExtResource("1_rp3da")
+slots = Array[ExtResource("2_fcwdk")]([SubResource("Resource_etyh1"), SubResource("Resource_xmdgj")])

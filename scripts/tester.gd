@@ -3,11 +3,13 @@ extends Node2D
 const TILE_SIZE := 32
 const GRID_SIZE := 16
 
+
 func _ready():
 
 	randomize()
 
 	create_test_characters()
+
 
 func _process(delta):
 

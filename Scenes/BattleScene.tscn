@@ -1,9 +1,22 @@
-[gd_scene format=3 uid="uid://bfgnkgmvp7gof"]
+[gd_scene format=3 uid="uid://dhlutil6mmq6y"]
 
-[ext_resource type="Script" uid="uid://h6p18kklseds" path="res://Scripts/GameController.gd" id="1_ttbo7"]
+[ext_resource type="Script" uid="uid://bshwtq573lf5d" path="res://Scripts/tester.gd" id="1_hip74"]
 [ext_resource type="PackedScene" uid="uid://l7sed51cwq85" path="res://Scenes/UI.tscn" id="2_hip74"]
+[ext_resource type="Script" uid="uid://cdu01bh487tnh" path="res://Scripts/ui.gd" id="3_b2eky"]
 
-[node name="Node2D" type="Node2D" unique_id=1903392087]
-script = ExtResource("1_ttbo7")
+[node name="Node2D" type="Node2D" unique_id=247274865]
+script = ExtResource("1_hip74")
 
-[node name="Control" parent="." unique_id=208033899 instance=ExtResource("2_hip74")]
+[node name="World" type="Node2D" parent="." unique_id=1937655249]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=329105817]
+
+[node name="BattleInterface" parent="CanvasLayer" unique_id=208033899 instance=ExtResource("2_hip74")]
+
+[node name="BattleMat" type="Control" parent="CanvasLayer" unique_id=468023995 node_paths=PackedStringArray("world_node")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_b2eky")
+world_node = NodePath("../../World")

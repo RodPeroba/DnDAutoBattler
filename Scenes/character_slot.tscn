@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://rja3r0nbyhuk"]
+
+[ext_resource type="Script" uid="uid://c7lhcda7h4lrb" path="res://Scripts/character_slot.gd" id="1_a1nqx"]
+[ext_resource type="Texture2D" uid="uid://dd63y8yhhgsb4" path="res://Assets/inventory-slot.png" id="2_b1crm"]
+
+[node name="CharacterSlot" type="TextureButton" unique_id=92182517]
+custom_minimum_size = Vector2(128, 128)
+script = ExtResource("1_a1nqx")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1213271341]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_b1crm")
+
+[node name="CharacterDisplay" type="TextureRect" parent="." unique_id=816432321]
+custom_minimum_size = Vector2(98, 98)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="CharacterLabel" type="Label" parent="." unique_id=1277336630]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

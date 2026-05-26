@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bls2nwi65cm7k"]
 
-[ext_resource type="Script" uid="uid://r5ma430khja1" path="res://battle_manager.gd" id="1_wtcfe"]
+[ext_resource type="Script" uid="uid://r5ma430khja1" path="res://Scripts/battle_manager.gd" id="1_wtcfe"]
 [ext_resource type="Resource" uid="uid://dn52k8q30tt27" path="res://inventory/playerinv.tres" id="2_0e48y"]
 [ext_resource type="Resource" uid="uid://bx0trmor85ka5" path="res://inventory/items/icon_item.tres" id="3_0hol4"]
 [ext_resource type="PackedScene" uid="uid://c8w5gb5g74prv" path="res://inventory/inv_ui.tscn" id="3_epypp"]
