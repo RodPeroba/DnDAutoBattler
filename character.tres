@@ -1,0 +1,8 @@
+[gd_resource type="Resource" format=3 uid="uid://p8ov51dbdl6d"]
+
+[ext_resource type="Script" uid="uid://c6po54qvypuww" path="res://base_character.gd" id="1_kfex2"]
+
+[resource]
+script = ExtResource("1_kfex2")
+name = "turtle"
+initiative = 20

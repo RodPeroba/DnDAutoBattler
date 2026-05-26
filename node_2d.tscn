@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://bls2nwi65cm7k"]
+
+[ext_resource type="Script" uid="uid://r5ma430khja1" path="res://battle_manager.gd" id="1_wtcfe"]
+[ext_resource type="Resource" uid="uid://dn52k8q30tt27" path="res://inventory/playerinv.tres" id="2_0e48y"]
+[ext_resource type="Resource" uid="uid://bx0trmor85ka5" path="res://inventory/items/icon_item.tres" id="3_0hol4"]
+[ext_resource type="PackedScene" uid="uid://c8w5gb5g74prv" path="res://inventory/inv_ui.tscn" id="3_epypp"]
+[ext_resource type="PackedScene" uid="uid://35bxcpweipqi" path="res://inventory/equip_ui_slot.tscn" id="5_q6r6c"]
+
+[node name="Node2D" type="Node2D" unique_id=346888786]
+script = ExtResource("1_wtcfe")
+inv = ExtResource("2_0e48y")
+item = ExtResource("3_0hol4")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1161991580]
+
+[node name="Inv_UI" parent="CanvasLayer" unique_id=1166234297 instance=ExtResource("3_epypp")]
+offset_left = 517.0
+offset_top = 146.0
+offset_right = -553.0
+offset_bottom = -441.0
+scale = Vector2(6.699, 7)
+
+[node name="Equip_Inv_UI" parent="CanvasLayer" unique_id=894818358 instance=ExtResource("5_q6r6c")]
+offset_left = 44.0
+offset_top = 142.0
+offset_right = -1026.0
+offset_bottom = -445.0
+scale = Vector2(4, 4)
+
+[node name="Button" type="Button" parent="." unique_id=1337399221]
+offset_left = 206.0
+offset_top = 213.0
+offset_right = 491.0
+offset_bottom = 335.0
+theme_override_font_sizes/font_size = 42
+text = "add icon item"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
