@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://35bxcpweipqi"]
+
+[ext_resource type="Script" uid="uid://bfq175piq1gam" path="res://inventory/equip_ui_slot.gd" id="1_6kgic"]
+[ext_resource type="Texture2D" uid="uid://vxkk5chkekli" path="res://Assets/inventory-background.png" id="2_y5vwi"]
+[ext_resource type="PackedScene" uid="uid://bteyhxvkjy3l3" path="res://inventory/inv_ui_slot.tscn" id="3_xkwb7"]
+
+[node name="Equip_Inv_UI" type="Control" unique_id=1166234297]
+custom_minimum_size = Vector2(82, 61)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1070.0
+offset_bottom = -587.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6kgic")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=2075150370]
+layout_mode = 0
+offset_right = 33.0
+offset_bottom = 90.0
+texture = ExtResource("2_y5vwi")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="GridContainer" type="GridContainer" parent="NinePatchRect" unique_id=1540122222]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -38.0
+offset_right = 8.0
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="inv_UI_slot" parent="NinePatchRect/GridContainer" unique_id=245840624 instance=ExtResource("3_xkwb7")]
+layout_mode = 2
+
+[node name="inv_UI_slot2" parent="NinePatchRect/GridContainer" unique_id=1544471849 instance=ExtResource("3_xkwb7")]
+layout_mode = 2
+
+[node name="inv_UI_slot3" parent="NinePatchRect/GridContainer" unique_id=1299682805 instance=ExtResource("3_xkwb7")]
+layout_mode = 2
+
+[node name="inv_UI_slot4" parent="NinePatchRect/GridContainer" unique_id=924042423 instance=ExtResource("3_xkwb7")]
+layout_mode = 2
