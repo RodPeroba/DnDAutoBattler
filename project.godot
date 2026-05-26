@@ -10,10 +10,14 @@ config_version=5
 
 [application]
 
-config/name="D&D Autobattler"
-run/main_scene="uid://bfgnkgmvp7gof"
+config/name="dnd autobattler"
+run/main_scene="uid://dhlutil6mmq6y"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://Assets/icon.svg"
+config/icon="res://icon.svg"
+
+[autoload]
+
+Manager="*uid://b1fu5xnj0jwu6"
 
 [physics]
 
