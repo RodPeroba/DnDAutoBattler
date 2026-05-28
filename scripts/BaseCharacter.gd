@@ -93,6 +93,8 @@ func act():
 	attack()
 	
 func takeDamage(value: int):
+	if armorValue >= 100:
+		print("Revisar valores de armadura urgente!!!!!!!")
 	currentHp -= int(value * ((100.0-armorValue)/100.0))
 	if currentHp <= 0:
 		die()
