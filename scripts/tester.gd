@@ -3,7 +3,6 @@ extends Node2D
 const TILE_SIZE := 32
 const GRID_SIZE := 16
 
-
 func _ready():
 
 	randomize()
@@ -43,6 +42,7 @@ func create_test_characters():
 	var armor = ArmorData.new()
 
 	armor.armorValue = 10
+	armor.item_type = InvItem.ItemType.CHEST
 
 	var dice = DiceExpression.new()
 
@@ -69,7 +69,7 @@ func create_test_characters():
 	character1.race = race
 	character1.characterClass = warrior
 	character1.weapon = sword
-	character1.armor = armor
+	character1.chest = armor
 
 	character1.position = Vector2i(2, 8)
 
@@ -82,7 +82,7 @@ func create_test_characters():
 	character3.race = race
 	character3.characterClass = archer
 	character3.weapon = bow
-	character3.armor = armor
+	character3.chest = armor
 
 	character3.position = Vector2i(2, 5)
 
@@ -95,7 +95,7 @@ func create_test_characters():
 	character2.race = race
 	character2.characterClass = archer
 	character2.weapon = bow
-	character2.armor = armor
+	character2.chest = armor
 
 	character2.position = Vector2i(14, 10)
 
@@ -108,7 +108,7 @@ func create_test_characters():
 	character4.race = race
 	character4.characterClass = warrior
 	character4.weapon = sword
-	character4.armor = armor
+	character4.chest = armor
 
 	character4.position = Vector2i(12, 8)
 

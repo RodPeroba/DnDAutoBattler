@@ -1,4 +1,4 @@
-class_name WeaponData extends ItemData
+class_name WeaponData extends InvItem
 
 @export var damage : DiceExpression
 @export var rangeDistance : int 

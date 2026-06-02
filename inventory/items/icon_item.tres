@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_cd3v3")
-name = "Fulano"
+name = "helmet"
 texture = ExtResource("2_cepck")
+item_type = 1
 metadata/_custom_type_script = "uid://toodrbpf1ns7"

@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://bshwtq573lf5d" path="res://Scripts/tester.gd" id="1_hip74"]
 [ext_resource type="PackedScene" uid="uid://l7sed51cwq85" path="res://Scenes/UI.tscn" id="2_hip74"]
 [ext_resource type="Script" uid="uid://cdu01bh487tnh" path="res://Scripts/ui.gd" id="3_b2eky"]
+[ext_resource type="PackedScene" uid="uid://c8w5gb5g74prv" path="res://inventory/inv_ui.tscn" id="4_ahap6"]
+[ext_resource type="PackedScene" uid="uid://35bxcpweipqi" path="res://inventory/equip_ui_slot.tscn" id="5_hb1yk"]
 
 [node name="Node2D" type="Node2D" unique_id=247274865]
 script = ExtResource("1_hip74")
@@ -20,3 +22,15 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("3_b2eky")
 world_node = NodePath("../../World")
+
+[node name="Inv_UI" parent="CanvasLayer" unique_id=1166234297 instance=ExtResource("4_ahap6")]
+offset_left = 398.0
+offset_top = 246.0
+offset_right = -672.0
+offset_bottom = -341.0
+
+[node name="Equip_Inv_UI" parent="CanvasLayer" unique_id=1230979704 instance=ExtResource("5_hb1yk")]
+offset_left = 306.0
+offset_top = 226.0
+offset_right = -764.0
+offset_bottom = -361.0

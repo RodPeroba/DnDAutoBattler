@@ -3,7 +3,10 @@ class_name BaseCharacter extends Resource
 @export var race : RaceData
 @export var characterClass : ClassData
 @export var weapon : WeaponData
-@export var armor : ArmorData
+@export var helmet: ArmorData
+@export var chest: ArmorData
+@export var legs: ArmorData
+@export var boots: ArmorData
 @export var level : int = 1
 @export var sprite : Texture2D
 
@@ -29,7 +32,15 @@ func setStats():
 	currentMana = 0
 	maxMana = characterClass.mana
 	baseDamage = race.baseDamage + characterClass.bonusDamage * level
-	armorValue = armor.armorValue
+	armorValue = 0
+	if helmet:
+		armorValue += helmet.armorValue
+	if chest:
+		armorValue += chest.armorValue
+	if legs:
+		armorValue += legs.armorValue
+	if boots:
+		armorValue += boots.armorValue
 	speed = race.baseSpeed
 	rangeDistance = weapon.rangeDistance
 
@@ -93,8 +104,6 @@ func act():
 	attack()
 	
 func takeDamage(value: int):
-	if armorValue >= 100:
-		print("Revisar valores de armadura urgente!!!!!!!")
 	currentHp -= int(value * ((100.0-armorValue)/100.0))
 	if currentHp <= 0:
 		die()

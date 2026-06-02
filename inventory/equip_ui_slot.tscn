@@ -42,12 +42,20 @@ grow_vertical = 2
 
 [node name="inv_UI_slot" parent="NinePatchRect/GridContainer" unique_id=245840624 instance=ExtResource("3_xkwb7")]
 layout_mode = 2
+only_accept_specific_type = true
+accepted_type = 1
 
 [node name="inv_UI_slot2" parent="NinePatchRect/GridContainer" unique_id=1544471849 instance=ExtResource("3_xkwb7")]
 layout_mode = 2
+only_accept_specific_type = true
+accepted_type = 2
 
 [node name="inv_UI_slot3" parent="NinePatchRect/GridContainer" unique_id=1299682805 instance=ExtResource("3_xkwb7")]
 layout_mode = 2
+only_accept_specific_type = true
+accepted_type = 3
 
 [node name="inv_UI_slot4" parent="NinePatchRect/GridContainer" unique_id=924042423 instance=ExtResource("3_xkwb7")]
 layout_mode = 2
+only_accept_specific_type = true
+accepted_type = 4
