@@ -1,0 +1,170 @@
+class_name Character
+extends Resource
+
+@export var race : RaceData
+@export var characterClass : ClassData
+@export var weapon : WeaponData
+@export var armor : ArmorData
+@export var level : int = 1
+@export var sprite : Texture2D
+
+@export var passives : Array[PassiveData]
+@export var activeAbility : ActiveData
+
+var battleManager : BattleManager
+var team : int = 0
+
+var maxHp : int
+var currentHp : int
+var currentMana : int
+var maxMana : int
+var baseDamage : int
+var armorValue : int
+var speed : int
+var iniciative : int
+var rangeDistance : int
+
+var position : Vector2i
+var target : Character
+
+func initialize():
+	setStats()
+
+func setStats():
+	maxHp = race.baseHealth + characterClass.bonusHealth * level
+	currentHp = maxHp
+	currentMana = 0
+	maxMana = characterClass.mana
+	baseDamage = race.baseDamage + characterClass.bonusDamage * level
+	armorValue = armor.armorValue
+	speed = race.baseSpeed
+	rangeDistance = weapon.rangeDistance
+
+
+func emitEvent(eventName : String, context : Dictionary = {}):
+	for passive in passives:
+		passive.handleEvent(eventName, self, context)
+
+func act():
+	emitEvent("OnTurnStart")
+	
+	if target == null or target.currentHp <= 0:
+		findTarget()
+	
+	if target == null:
+		return
+	
+	moveToRange()
+	if (activeAbility != null and activeAbility.canUse(self)):
+		useAbility()
+	else:
+		if isTargetInRange():
+			attack()
+			currentMana = min(currentMana + 5, maxMana)
+	emitEvent("OnTurnEnd")
+
+func findTarget():
+	var closestDistance = INF
+	target = null
+
+	for character in battleManager.characters:
+		if character == self: continue
+		if character.team == team: continue
+		if character.currentHp <= 0: continue
+		
+		var distance = position.distance_to(character.position)
+		
+		if distance < closestDistance:
+			closestDistance = distance
+			target = character
+	
+	if target != null:
+		print("%s targets %s" % [characterClass.className, target.characterClass.className])
+	
+func isTargetInRange() -> bool:
+	if target == null:
+		return false
+	
+	var distance = abs(position.x - target.position.x) + abs(position.y - target.position.y)
+	return distance <= rangeDistance
+
+func moveToRange():
+	if target == null:
+		return
+	
+	for i in range(speed):
+		if isTargetInRange():
+			return
+	
+		var distX = target.position.x - position.x
+		var distY = target.position.y - position.y
+		var nextPosition = position
+		
+		if abs(distX) >= abs(distY):
+			if distX != 0:
+				nextPosition.x += sign(distX)
+		else:
+			if distY != 0:
+				nextPosition.y += sign(distY)
+		
+		if !battleManager.isPositionOccupied(nextPosition):
+			position = nextPosition
+			print("%s moved to %s" % [characterClass.className, position])
+
+func attack():
+	if target == null:
+		return
+	
+	var context = {
+		"target": target,
+		"damage": weapon.rollDamage() + baseDamage
+	}
+	
+	emitEvent("OnAttack", context)
+	
+	print("%s attacks %s for %d" % [
+		characterClass.className,
+		target.characterClass.className,
+		context["damage"]
+	])
+	
+	target.takeDamage(context["damage"], self)
+	
+func useAbility():
+	if activeAbility == null:
+		return
+	var context = {"target": target}
+	print("%s uses %s" % [characterClass.className, activeAbility.abilityName])
+	activeAbility.use(self, context)
+
+func takeDamage(value : int, attacker : Character = null):
+	var context = {
+		"attacker": attacker,
+		"damage": value
+	}
+	
+	emitEvent("OnReceiveDamage", context)
+	
+	var finalDamage = int(context["damage"] * ((100.0 - armorValue) / 100.0))
+	currentHp -= finalDamage
+	
+	print("%s takes %d damage (%d HP left)" % [
+		characterClass.className,
+		finalDamage,
+		currentHp
+	])
+	
+	if currentHp <= 0:
+		die(attacker)
+
+func die(killer : Character = null):
+	currentHp = 0
+	
+	print("%s died" % characterClass.className)
+	
+	emitEvent("OnDeath", {"killer": killer})
+	
+	if killer != null:
+		killer.emitEvent("OnKill", {"target": self})
+	
+	battleManager.removeCharacter(self)
