@@ -8,4 +8,5 @@ func execute(owner : Character, context : Dictionary):
 		owner.currentHp + amount,
 		owner.maxHp
 	)
-	print("%s heals for %d" %[owner.characterClass.className, amount])
+	debugText = "%s heals for %d" %[owner.characterClass.className, amount]
+	super.execute(owner, context)

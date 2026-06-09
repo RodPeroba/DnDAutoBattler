@@ -3,4 +3,5 @@ extends EffectData
 
 func execute(owner : Character, context : Dictionary):
 	owner.act()
-	print("%s attacks again" % owner.characterClass.className)
+	debugText = "%s attacks again" % owner.characterClass.className
+	super.execute(owner, context)

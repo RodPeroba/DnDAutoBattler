@@ -15,4 +15,5 @@ func execute(owner : Character,context : Dictionary):
 	context["damage"] += (
 		distance * damagePerTile
 	)
-	print("%s do %d extra damage" % [owner.characterClass.className, distance * damagePerTile])
+	debugText = "%s do %d extra damage" % [owner.characterClass.className, distance * damagePerTile]
+	super.execute(owner, context)

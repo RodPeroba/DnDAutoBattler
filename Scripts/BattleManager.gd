@@ -22,16 +22,16 @@ func removeCharacter(character : Character):
 	turnOrder.erase(character)
 
 func startBattle():
-	print("===== BATTLE START =====")
+	Debug.print("===== BATTLE START =====")
 	generateInitiative()
 	sortInitiative()
 
-	print("===== TURN ORDER =====")
+	Debug.print("===== TURN ORDER =====")
 
 	for i in range(turnOrder.size()):
 		var character = turnOrder[i]
 
-		print("%d - %s (%d)" % [
+		Debug.print("%d - %s (%d)" % [
 			i + 1,
 			character.characterClass.className,
 			character.iniciative
@@ -40,8 +40,9 @@ func startBattle():
 	debugBattle()
 
 func generateInitiative():
+	var dice  = DiceExpression.new([DiceTerm.new(1,20)])
 	for character in characters:
-		character.iniciative = randi_range(1, 20) + character.characterClass.iniciativeBonus
+		character.iniciative = dice.roll() + character.characterClass.iniciativeBonus
 
 func sortInitiative():
 	turnOrder = characters.duplicate()
@@ -52,14 +53,14 @@ func sortInitiative():
 
 func nextTurn():
 	if isBattleFinished():
-		print("===== BATTLE ENDED =====")
-		print("TEAM %d WINS" % getWinningTeam())
+		Debug.print("===== BATTLE ENDED =====")
+		Debug.print("TEAM %d WINS" % getWinningTeam())
 		return
 
 	if currentTurn >= turnOrder.size():
 		currentTurn = 0
 		round += 1
-		print("===== ROUND %d =====" % round)
+		Debug.print("===== ROUND %d =====" % round)
 	
 	var actor = turnOrder[currentTurn]
 	currentTurn += 1
@@ -67,7 +68,7 @@ func nextTurn():
 	if actor.currentHp <= 0:
 		return
 	
-	print("TURN: %s" % actor.characterClass.className)
+	Debug.print("TURN: %s" % actor.characterClass.className)
 	
 	actor.act()
 	
@@ -109,10 +110,10 @@ func isPositionOccupied(position : Vector2i) -> bool:
 	return false
 
 func debugBattle():
-	print("===== BATTLE STATE =====")
+	Debug.print("===== BATTLE STATE =====")
 	
 	for character in characters:
-		print("%s | Team %d | HP %d/%d | Mana %d/%d | Pos %s" % [
+		Debug.print("%s | Team %d | HP %d/%d | Mana %d/%d | Pos %s" % [
 			character.characterClass.className,
 			character.team,
 			character.currentHp,

@@ -11,14 +11,15 @@ func execute(owner : Character,context : Dictionary):
 		var distance = (
 			abs(owner.position.x - character.position.x)
 			+
-			abs(owner.position.y - character.position.y)
+			abs(owner.position.y - character.position.y)  
 		)
 	
 		if distance > owner.rangeDistance:
 			continue
 		
-		print("%s hits %s with Volley for %d" % [owner.characterClass.className, character.characterClass.className, damage])
-	
+		debugText = "%s hits %s with Volley for %d" % [owner.characterClass.className, character.characterClass.className, damage]
+		super.execute(owner, context)
+		
 		character.takeDamage(
 			damage,
 			owner

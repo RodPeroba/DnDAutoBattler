@@ -50,7 +50,7 @@ func act():
 	
 	if target == null or target.currentHp <= 0:
 		findTarget()
-	
+		
 	if target == null:
 		return
 	
@@ -79,7 +79,7 @@ func findTarget():
 			target = character
 	
 	if target != null:
-		print("%s targets %s" % [characterClass.className, target.characterClass.className])
+		Debug.print("%s targets %s" % [characterClass.className, target.characterClass.className])
 	
 func isTargetInRange() -> bool:
 	if target == null:
@@ -109,7 +109,7 @@ func moveToRange():
 		
 		if !battleManager.isPositionOccupied(nextPosition):
 			position = nextPosition
-			print("%s moved to %s" % [characterClass.className, position])
+			Debug.print("%s moved to %s" % [characterClass.className, position])
 
 func attack():
 	if target == null:
@@ -122,7 +122,7 @@ func attack():
 	
 	emitEvent("OnAttack", context)
 	
-	print("%s attacks %s for %d" % [
+	Debug.print("%s attacks %s for %d" % [
 		characterClass.className,
 		target.characterClass.className,
 		context["damage"]
@@ -134,7 +134,7 @@ func useAbility():
 	if activeAbility == null:
 		return
 	var context = {"target": target}
-	print("%s uses %s" % [characterClass.className, activeAbility.abilityName])
+	Debug.print("%s uses %s" % [characterClass.className, activeAbility.abilityName])
 	activeAbility.use(self, context)
 
 func takeDamage(value : int, attacker : Character = null):
@@ -148,7 +148,7 @@ func takeDamage(value : int, attacker : Character = null):
 	var finalDamage = int(context["damage"] * ((100.0 - armorValue) / 100.0))
 	currentHp -= finalDamage
 	
-	print("%s takes %d damage (%d HP left)" % [
+	Debug.print("%s takes %d damage (%d HP left)" % [
 		characterClass.className,
 		finalDamage,
 		currentHp
@@ -160,7 +160,7 @@ func takeDamage(value : int, attacker : Character = null):
 func die(killer : Character = null):
 	currentHp = 0
 	
-	print("%s died" % characterClass.className)
+	Debug.print("%s died" % characterClass.className)
 	
 	emitEvent("OnDeath", {"killer": killer})
 	

@@ -2,5 +2,7 @@
 class_name EffectData
 extends Resource
 
+var debugText = ""
+
 func execute(owner : Character, context : Dictionary):
-	pass
+	Debug.print(debugText)

@@ -44,7 +44,7 @@ func create_test_characters():
 
 	var dice = DiceExpression.new()
 
-	var term = DiceTerm.new()
+	var term = DiceTerm.new(1, 8)
 	term.rolls = 1
 	term.sides = 8
 
@@ -65,7 +65,7 @@ func create_test_characters():
 	regenPassive.trigger = "OnTurnStart"
 
 	var regenEffect = HealEffect.new()
-	regenEffect.amount = 10
+	regenEffect.amount = -5
 
 	regenPassive.effects.append(regenEffect)
 

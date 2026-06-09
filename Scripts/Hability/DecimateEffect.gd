@@ -9,7 +9,8 @@ func execute(owner : Character, context : Dictionary):
 	if target == null:
 		return
 	
-	print("%s decimates %s for %d" % [owner.characterClass.className, target.characterClass.className,damage])
+	debugText = "%s decimates %s for %d" % [owner.characterClass.className, target.characterClass.className,damage]
+	super.execute(owner, context)
 	
 	target.takeDamage(
 		damage,
