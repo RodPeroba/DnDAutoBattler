@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://dab08ssn6pa11"]
+
+[ext_resource type="Script" uid="uid://bmdkiri8u1e3s" path="res://Scripts/DiceTerm.gd" id="1_i6knp"]
+[ext_resource type="Script" uid="uid://da23nic8i1056" path="res://Scripts/DiceExpression.gd" id="2_w5uth"]
+[ext_resource type="Script" uid="uid://btpkyikuscuc" path="res://Scripts/DataScripts/WeaponData.gd" id="3_1nqhc"]
+
+[sub_resource type="Resource" id="Resource_h5vpt"]
+script = ExtResource("1_i6knp")
+sides = 8
+metadata/_custom_type_script = "uid://bmdkiri8u1e3s"
+
+[sub_resource type="Resource" id="Resource_cx2al"]
+script = ExtResource("2_w5uth")
+dice_terms = Array[ExtResource("1_i6knp")]([SubResource("Resource_h5vpt")])
+metadata/_custom_type_script = "uid://da23nic8i1056"
+
+[resource]
+script = ExtResource("3_1nqhc")
+damage = SubResource("Resource_cx2al")
+rangeDistance = 3
+itemName = "Spell Book"
+metadata/_custom_type_script = "uid://btpkyikuscuc"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RaceData" format=3 uid="uid://br0ltjsgoypsr"]
+
+[ext_resource type="Script" uid="uid://dhxocm5uvcopf" path="res://Scripts/DataScripts/RaceData.gd" id="1_2ru2d"]
+
+[resource]
+script = ExtResource("1_2ru2d")
+raceName = "Human"
+bonusHealth = 20
+baseSpeed = 3
+baseDamage = 3
+metadata/_custom_type_script = "uid://dhxocm5uvcopf"

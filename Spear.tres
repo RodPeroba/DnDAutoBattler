@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://brgub35tcckcs"]
+
+[ext_resource type="Script" uid="uid://bmdkiri8u1e3s" path="res://Scripts/DiceTerm.gd" id="1_ud88r"]
+[ext_resource type="Script" uid="uid://da23nic8i1056" path="res://Scripts/DiceExpression.gd" id="2_b2oln"]
+[ext_resource type="Script" uid="uid://btpkyikuscuc" path="res://Scripts/DataScripts/WeaponData.gd" id="3_j8sl4"]
+
+[sub_resource type="Resource" id="Resource_y177x"]
+script = ExtResource("1_ud88r")
+sides = 10
+metadata/_custom_type_script = "uid://bmdkiri8u1e3s"
+
+[sub_resource type="Resource" id="Resource_4pc4b"]
+script = ExtResource("2_b2oln")
+dice_terms = Array[ExtResource("1_ud88r")]([SubResource("Resource_y177x")])
+metadata/_custom_type_script = "uid://da23nic8i1056"
+
+[resource]
+script = ExtResource("3_j8sl4")
+damage = SubResource("Resource_4pc4b")
+rangeDistance = 1
+itemName = "Spear"
+metadata/_custom_type_script = "uid://btpkyikuscuc"

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ArmorData" format=3 uid="uid://q76glneqrwir"]
+
+[ext_resource type="Script" uid="uid://dqb6p0yb8th65" path="res://Scripts/DataScripts/ArmorData.gd" id="1_b3b5v"]
+
+[resource]
+script = ExtResource("1_b3b5v")
+armorValue = 1
+itemName = "Simple Clothes"
+metadata/_custom_type_script = "uid://dqb6p0yb8th65"

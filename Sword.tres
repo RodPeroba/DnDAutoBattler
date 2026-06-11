@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://bl4qrekpygcri"]
+
+[ext_resource type="Script" uid="uid://bmdkiri8u1e3s" path="res://Scripts/DiceTerm.gd" id="1_p8prr"]
+[ext_resource type="Script" uid="uid://da23nic8i1056" path="res://Scripts/DiceExpression.gd" id="2_uhlep"]
+[ext_resource type="Script" uid="uid://btpkyikuscuc" path="res://Scripts/DataScripts/WeaponData.gd" id="3_nhlik"]
+
+[sub_resource type="Resource" id="Resource_86miw"]
+script = ExtResource("1_p8prr")
+sides = 8
+metadata/_custom_type_script = "uid://bmdkiri8u1e3s"
+
+[sub_resource type="Resource" id="Resource_m178q"]
+script = ExtResource("2_uhlep")
+dice_terms = Array[ExtResource("1_p8prr")]([SubResource("Resource_86miw")])
+metadata/_custom_type_script = "uid://da23nic8i1056"
+
+[resource]
+script = ExtResource("3_nhlik")
+damage = SubResource("Resource_m178q")
+rangeDistance = 1
+itemName = "Sword"
+metadata/_custom_type_script = "uid://btpkyikuscuc"

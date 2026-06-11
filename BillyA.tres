@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Character" format=3 uid="uid://5hkqpk2k28d0"]
+
+[ext_resource type="Resource" uid="uid://q76glneqrwir" path="res://SimpleClothes.tres" id="1_s0pot"]
+[ext_resource type="Resource" uid="uid://ddgbythwxlt87" path="res://ArcherClass.tres" id="2_ttij5"]
+[ext_resource type="Resource" uid="uid://br0ltjsgoypsr" path="res://HumanRace.tres" id="3_ogjmu"]
+[ext_resource type="Script" uid="uid://jqc24i724eso" path="res://Scripts/Character.gd" id="4_18as7"]
+[ext_resource type="Resource" uid="uid://dw0v7h0va1upk" path="res://Bow.tres" id="5_narxg"]
+
+[resource]
+script = ExtResource("4_18as7")
+race = ExtResource("3_ogjmu")
+characterClass = ExtResource("2_ttij5")
+weapon = ExtResource("5_narxg")
+armor = ExtResource("1_s0pot")
+metadata/_custom_type_script = "uid://jqc24i724eso"

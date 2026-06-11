@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Character" format=3 uid="uid://dicy8uq2vscai"]
+
+[ext_resource type="Resource" uid="uid://q76glneqrwir" path="res://SimpleClothes.tres" id="1_2vc6w"]
+[ext_resource type="Resource" uid="uid://6n26qacs1lfl" path="res://MageClass.tres" id="2_k46vw"]
+[ext_resource type="Resource" uid="uid://br0ltjsgoypsr" path="res://HumanRace.tres" id="3_4d847"]
+[ext_resource type="Script" uid="uid://jqc24i724eso" path="res://Scripts/Character.gd" id="4_7li32"]
+[ext_resource type="Resource" uid="uid://dab08ssn6pa11" path="res://SpellBook.tres" id="5_tst3h"]
+
+[resource]
+script = ExtResource("4_7li32")
+race = ExtResource("3_4d847")
+characterClass = ExtResource("2_k46vw")
+weapon = ExtResource("5_tst3h")
+armor = ExtResource("1_2vc6w")
+metadata/_custom_type_script = "uid://jqc24i724eso"

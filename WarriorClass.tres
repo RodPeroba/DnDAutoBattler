@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ClassData" format=3 uid="uid://pm8e4plfyivp"]
+
+[ext_resource type="Script" uid="uid://dsgso1u0i3ytg" path="res://Scripts/DataScripts/ActiveData.gd" id="1_kjftn"]
+[ext_resource type="Script" uid="uid://cdx3scntb74pg" path="res://Scripts/DataScripts/EffectData.gd" id="2_ynjcy"]
+[ext_resource type="Script" uid="uid://5ele1jgekwqu" path="res://HuntEffect.gd" id="3_um4aq"]
+[ext_resource type="Script" uid="uid://c5fiw5ml42usf" path="res://Scripts/DataScripts/ClassData.gd" id="4_wjvy5"]
+
+[sub_resource type="Resource" id="Resource_t84aj"]
+script = ExtResource("3_um4aq")
+metadata/_custom_type_script = "uid://5ele1jgekwqu"
+
+[sub_resource type="Resource" id="Resource_7ou1b"]
+script = ExtResource("1_kjftn")
+effects = Array[ExtResource("2_ynjcy")]([SubResource("Resource_t84aj")])
+metadata/_custom_type_script = "uid://dsgso1u0i3ytg"
+
+[resource]
+script = ExtResource("4_wjvy5")
+className = "Warrior"
+bonusHealth = 75
+baseHealth = 100
+bonusDamage = 5
+mana = 50
+manaPerAttack = 5
+iniciativeBonus = 5
+activeAbilities = Array[ExtResource("1_kjftn")]([SubResource("Resource_7ou1b")])
+metadata/_custom_type_script = "uid://c5fiw5ml42usf"

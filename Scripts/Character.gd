@@ -8,9 +8,11 @@ extends Resource
 @export var level : int = 1
 @export var sprite : Texture2D
 
-@export var passives : Array[PassiveData]
-@export var activeAbility : ActiveData
-
+var passives : Array[PassiveData]
+var activeAbility : ActiveData
+@export var chosenAbility : int = 0
+var statuses : Array[StatusEffectData]
+@export var xp : int = 0
 var battleManager : BattleManager
 var team : int = 0
 
@@ -31,7 +33,7 @@ func initialize():
 	setStats()
 
 func setStats():
-	maxHp = race.baseHealth + characterClass.bonusHealth * level
+	maxHp = race.bonusHealth * level + characterClass.bonusHealth * level + characterClass.baseHealth
 	currentHp = maxHp
 	currentMana = 0
 	maxMana = characterClass.mana
@@ -39,11 +41,34 @@ func setStats():
 	armorValue = armor.armorValue
 	speed = race.baseSpeed
 	rangeDistance = weapon.rangeDistance
+	activeAbility = characterClass.activeAbilities[chosenAbility]
 
 
 func emitEvent(eventName : String, context : Dictionary = {}):
 	for passive in passives:
 		passive.handleEvent(eventName, self, context)
+	for status in statuses:
+		status.handleEvent(eventName, self, context)
+		
+	updateStatuses(eventName)
+	
+func addStatus(status : StatusEffectData):
+	statuses.append(
+		status.duplicate(true)
+	)
+	
+func updateStatuses(eventName : String):
+	for status in statuses.duplicate():
+		if status.durationTrigger != eventName:
+			continue
+			
+		status.duration -= 1
+		
+		if status.duration <= 0:
+			
+			Debug.print("%s lost %s" %[characterClass.className, status.effectName])
+			
+			statuses.erase(status)
 
 func act():
 	emitEvent("OnTurnStart")
@@ -60,7 +85,7 @@ func act():
 	else:
 		if isTargetInRange():
 			attack()
-			currentMana = min(currentMana + 5, maxMana)
+			currentMana = min(currentMana + characterClass.manaPerAttack, maxMana)
 	emitEvent("OnTurnEnd")
 
 func findTarget():
@@ -156,6 +181,21 @@ func takeDamage(value : int, attacker : Character = null):
 	
 	if currentHp <= 0:
 		die(attacker)
+
+func heal(amount : int):
+	currentHp = min(
+		maxHp,
+		currentHp + amount
+	)
+	
+	Debug.print(
+		"%s heals %d HP"
+		%
+		[
+			characterClass.className,
+			amount
+		]
+	)
 
 func die(killer : Character = null):
 	currentHp = 0

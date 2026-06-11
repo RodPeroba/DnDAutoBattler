@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Character" format=3 uid="uid://bvfhm8s8p0ntn"]
+
+[ext_resource type="Resource" uid="uid://ccp0fvcoxaf1b" path="res://LightArmor.tres" id="1_vrasa"]
+[ext_resource type="Resource" uid="uid://0q0w7361hr3e" path="res://ClericClass.tres" id="2_bgrru"]
+[ext_resource type="Resource" uid="uid://br0ltjsgoypsr" path="res://HumanRace.tres" id="3_tvf0w"]
+[ext_resource type="Script" uid="uid://jqc24i724eso" path="res://Scripts/Character.gd" id="4_42w6w"]
+[ext_resource type="Resource" uid="uid://brgub35tcckcs" path="res://Spear.tres" id="5_ejs8b"]
+
+[resource]
+script = ExtResource("4_42w6w")
+race = ExtResource("3_tvf0w")
+characterClass = ExtResource("2_bgrru")
+weapon = ExtResource("5_ejs8b")
+armor = ExtResource("1_vrasa")
+metadata/_custom_type_script = "uid://jqc24i724eso"
