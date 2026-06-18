@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://crmyy0hx6pa0u"]
+
+[ext_resource type="PackedScene" uid="uid://dgj0skyunewuu" path="res://Scenes/BoardView.tscn" id="1_41ces"]
+[ext_resource type="Script" uid="uid://di12neft2qqg2" path="res://BattleScreen.gd" id="1_n3o6y"]
+
+[node name="Control" type="Control" unique_id=1350881296 node_paths=PackedStringArray("battleInfo", "combatLog")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n3o6y")
+battleInfo = NodePath("Info")
+combatLog = NodePath("CombatLog")
+
+[node name="Info" type="Label" parent="." unique_id=309626431]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -237.0
+offset_bottom = 178.0
+grow_horizontal = 0
+
+[node name="CombatLog" type="RichTextLabel" parent="." unique_id=1298505287]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -274.0
+offset_top = -327.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Node2D" parent="." unique_id=1151715297 instance=ExtResource("1_41ces")]

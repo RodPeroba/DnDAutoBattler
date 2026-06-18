@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://dsvg5roebciuu"]
+
+[ext_resource type="PackedScene" uid="uid://dgj0skyunewuu" path="res://Scenes/BoardView.tscn" id="1_phwps"]
+[ext_resource type="Script" uid="uid://dn5bo4htruh1c" path="res://PositioningScreen.gd" id="1_xe3uy"]
+
+[node name="Control" type="Control" unique_id=1603857523 node_paths=PackedStringArray("boardView", "infoLabel", "confirmButton")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xe3uy")
+boardView = NodePath("Node2D")
+infoLabel = NodePath("Info")
+confirmButton = NodePath("Button")
+
+[node name="Info" type="Label" parent="." unique_id=1671529467]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -79.0
+offset_right = 79.0
+offset_bottom = 89.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Posicione os personagens"
+
+[node name="Button" type="Button" parent="." unique_id=1855327464]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -8.0
+offset_right = 4.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Iniciar Batalha"
+
+[node name="Node2D" parent="." unique_id=1151715297 instance=ExtResource("1_phwps")]
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

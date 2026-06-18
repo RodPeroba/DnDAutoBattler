@@ -2,44 +2,78 @@ class_name BattleManager
 extends Resource
 
 signal battleFinished(winnerTeam)
+signal logAdded(message : String)
 
 var characters : Array[Character] = []
 var turnOrder : Array[Character] = []
+
 var currentTurn : int = 0
 var round : int = 1
 
+var currentActor : Character
+
+var combatLog : Array[String] = []
+
 func resetBattle():
+
 	characters.clear()
 	turnOrder.clear()
+
 	currentTurn = 0
 	round = 1
 
+	currentActor = null
+
+	combatLog.clear()
+
+func loga(text : String):
+
+	combatLog.append(text)
+
+	logAdded.emit(text)
+
+	Debug.print(text)
+
+	if combatLog.size() > 200:
+		combatLog.pop_front()
+
 func registerCharacter(character : Character):
+
 	if not characters.has(character):
+
 		character.battleManager = self
+
 		characters.append(character)
 
 func removeCharacter(character : Character):
+
 	characters.erase(character)
+
 	turnOrder.erase(character)
 
 func startBattle():
-	Debug.print("===== BATTLE START =====")
+
+	loga("===== BATTLE START =====")
 
 	generateInitiative()
+
 	sortInitiative()
 
-	Debug.print("===== TURN ORDER =====")
+	loga("===== TURN ORDER =====")
 
 	for i in range(turnOrder.size()):
 
 		var character = turnOrder[i]
 
-		Debug.print("%d - %s (%d)" % [
-			i + 1,
-			character.characterClass.className,
-			character.iniciative
-		])
+		loga(
+			"%d - %s (%d)"
+			%
+			[
+				i + 1,
+				character.characterClass.className,
+				character.iniciative
+			]
+		)
 
 	debugBattle()
 
@@ -74,12 +108,13 @@ func nextTurn():
 
 		var winner = getWinningTeam()
 
-		Debug.print(
+		loga(
 			"===== BATTLE ENDED ====="
 		)
 
-		Debug.print(
-			"TEAM %d WINS" % winner
+		loga(
+			"TEAM %d WINS"
+			% winner
 		)
 
 		battleFinished.emit(
@@ -97,7 +132,7 @@ func nextTurn():
 
 		round += 1
 
-		Debug.print(
+		loga(
 			"===== ROUND %d ====="
 			% round
 		)
@@ -106,10 +141,15 @@ func nextTurn():
 
 	currentTurn += 1
 
+	if actor == null:
+		return
+
 	if actor.currentHp <= 0:
 		return
 
-	Debug.print(
+	currentActor = actor
+
+	loga(
 		"TURN: %s"
 		%
 		actor.characterClass.className
@@ -123,12 +163,13 @@ func nextTurn():
 
 		var winner = getWinningTeam()
 
-		Debug.print(
+		loga(
 			"===== BATTLE ENDED ====="
 		)
 
-		Debug.print(
-			"TEAM %d WINS" % winner
+		loga(
+			"TEAM %d WINS"
+			% winner
 		)
 
 		battleFinished.emit(
@@ -168,6 +209,24 @@ func getWinningTeam() -> int:
 
 	return teams.keys()[0]
 
+func getAliveCount(
+	team : int
+) -> int:
+
+	var count := 0
+
+	for character in characters:
+
+		if character.team != team:
+			continue
+
+		if character.currentHp <= 0:
+			continue
+
+		count += 1
+
+	return count
+
 func isPositionOccupied(
 	position : Vector2i
 ) -> bool:
@@ -184,13 +243,13 @@ func isPositionOccupied(
 
 func debugBattle():
 
-	Debug.print(
+	loga(
 		"===== BATTLE STATE ====="
 	)
 
 	for character in characters:
 
-		Debug.print(
+		loga(
 			"%s | Team %d | HP %d/%d | Mana %d/%d | Pos %s"
 			%
 			[

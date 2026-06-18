@@ -1,27 +1,64 @@
 extends Node
 
-enum GameState{
+enum GameState {
 	MENU,
+	STAGE,
+	POSITIONING,
 	BATTLE,
 	VICTORY,
-	DEFEAT
+	DEFEAT,
+	GAME_OVER
 }
 
+const STAGE_SCREEN = preload("res://Scenes/StageScreen.tscn")
+const POSITIONING_SCREEN = preload("res://Scenes/PositioningScreen.tscn")
+const BATTLE_SCREEN = preload("res://Scenes/BattleScreen.tscn")
+const VICTORY_SCREEN = preload("res://Scenes/VictoryScreen.tscn")
+const GAMEOVER_SCREEN = preload("res://Scenes/GameOverScreen.tscn")
+
 var currentState : GameState = GameState.MENU
+var currentScreen : Control
 
 var battleManager : BattleManager
 
 var playerParty : PartyData
 var enemyParty : PartyData
 
+var score : int = 0
+var battlesWon : int = 0
+
+const turnDelay : float = 0.5
+var turnTimer : float = 0.0
+
 func _ready():
+
 	randomize()
+
 	startGame()
 
+func _process(delta):
+
+	if currentState != GameState.BATTLE:
+		return
+
+	if battleManager == null:
+		return
+
+	turnTimer += delta
+
+	if turnTimer >= turnDelay:
+
+		turnTimer = 0.0
+
+		battleManager.nextTurn()
+
 func startGame():
-	print(load("res://Spear.tres"))
-	
-	
+
+	score = 0
+	battlesWon = 0
+
+	Debug.print("=== GAME START ===")
+
 	playerParty = load(
 		"res://PlayerParty.tres"
 	)
@@ -30,20 +67,82 @@ func startGame():
 		"res://EnemyParty.tres"
 	)
 
-	Debug.print("=== GAME START ===")
+	enterStage()
+
+func changeScreen(
+	scene : PackedScene
+):
+
+	if currentScreen != null:
+		currentScreen.queue_free()
+
+	currentScreen = scene.instantiate()
+
+	var container = (
+		get_tree()
+		.current_scene
+		.get_node("CurrentScreen")
+	)
+
+	container.add_child(
+		currentScreen
+	)
+
+func enterStage():
+
+	currentState = GameState.STAGE
+
+	Debug.print(
+		"=== STAGE ==="
+	)
+
+	Debug.print(
+		"Battles Won: %d | Score: %d"
+		%
+		[
+			battlesWon,
+			score
+		]
+	)
+
+	changeScreen(
+		STAGE_SCREEN
+	)
+
+func enterPositioning():
+
+	currentState = GameState.POSITIONING
+
+	Debug.print(
+		"=== POSITIONING ==="
+	)
+
+	changeScreen(
+		POSITIONING_SCREEN
+	)
+
+func confirmPositioning():
 
 	startBattle()
 
 func startBattle():
 
-	Debug.print("=== BATTLE START ===")
+	Debug.print(
+		"=== BATTLE START ==="
+	)
 
 	currentState = GameState.BATTLE
+
+	turnTimer = 0.0
 
 	battleManager = BattleManager.new()
 
 	battleManager.battleFinished.connect(
 		_onBattleFinished
+	)
+
+	changeScreen(
+		BATTLE_SCREEN
 	)
 
 	createBattleCharacters()
@@ -66,81 +165,115 @@ func _onBattleFinished(
 
 	if winnerTeam == 0:
 
-		currentState = GameState.VICTORY
-
-		Debug.print(
-			"=== TEAM 0 WINS ==="
-		)
+		handleVictory()
 
 	else:
 
-		currentState = GameState.DEFEAT
+		handleDefeat()
 
-		Debug.print(
-			"=== TEAM 1 WINS ==="
-		)
+func handleVictory():
+
+	battlesWon += 1
+
+	var earnedScore = (
+		calculateBattleScore()
+	)
+
+	score += earnedScore
+
+	currentState = GameState.VICTORY
+
+	Debug.print(
+		"=== VICTORY ==="
+	)
+
+	Debug.print(
+		"Battle Score: %d"
+		% earnedScore
+	)
+
+	Debug.print(
+		"Total Score: %d"
+		% score
+	)
+
+	Debug.print(
+		"Battles Won: %d"
+		% battlesWon
+	)
+
+	changeScreen(
+		VICTORY_SCREEN
+	)
+
+func calculateBattleScore() -> int:
+
+	if battleManager == null:
+		return 100
+
+	var aliveBonus = (
+		battleManager.getAliveCount(0)
+		* 25
+	)
+
+	var streakBonus = (
+		battlesWon
+		* 50
+	)
+
+	return (
+		100
+		+ aliveBonus
+		+ streakBonus
+	)
+
+func continueAfterVictory():
+
+	enterStage()
+
+func handleDefeat():
+
+	currentState = GameState.DEFEAT
+
+	Debug.print(
+		"=== DEFEAT ==="
+	)
+
+	gameOver()
+
+func gameOver():
+
+	currentState = GameState.GAME_OVER
+
+	Debug.print(
+		"=== GAME OVER ==="
+	)
+
+	Debug.print(
+		"Final Score: %d"
+		% score
+	)
+
+	Debug.print(
+		"Battles Won: %d"
+		% battlesWon
+	)
+
+	changeScreen(
+		GAMEOVER_SCREEN
+	)
+
+func restartGame():
+
+	battleManager = null
+
+	startGame()
 
 func resetBattle():
 
 	battleManager = null
 
-	startBattle()
-
-func createBattleCharacters():
-
-	var team0Positions = [
-		Vector2i(2,8),
-		Vector2i(2,5),
-		Vector2i(2,11),
-		Vector2i(4,8)
-	]
-
-	var team1Positions = [
-		Vector2i(12,8),
-		Vector2i(14,10),
-		Vector2i(14,5),
-		Vector2i(10,8)
-	]
-
-	for i in range(playerParty.characters.size()):
-
-		var character : Character = (
-			playerParty.characters[i]
-			.duplicate(true)
-		)
-
-		character.team = 0
-
-		if i < team0Positions.size():
-			character.position = (
-				team0Positions[i]
-			)
-
-		character.initialize()
-
-		battleManager.registerCharacter(
-			character
-		)
-
-	for i in range(enemyParty.characters.size()):
-
-		var character : Character = (
-			enemyParty.characters[i]
-			.duplicate(true)
-		)
-
-		character.team = 1
-
-		if i < team1Positions.size():
-			character.position = (
-				team1Positions[i]
-			)
-
-		character.initialize()
-
-		battleManager.registerCharacter(
-			character
-		)
+	enterPositioning()
 
 func loadBattle(
 	playerData : PartyData,
@@ -150,4 +283,60 @@ func loadBattle(
 	playerParty = playerData
 	enemyParty = enemyData
 
-	startBattle()
+	enterPositioning()
+
+func createBattleCharacters():
+
+	if playerParty == null:
+		return
+
+	if enemyParty == null:
+		return
+
+	var team1Positions = [
+		Vector2i(12, 8),
+		Vector2i(14, 10),
+		Vector2i(14, 5),
+		Vector2i(10, 8)
+	]
+
+	for characterData in playerParty.characters:
+
+		var character : Character = (
+			characterData.duplicate(true)
+		)
+
+		character.position = (
+			characterData.position
+		)
+
+		character.team = 0
+
+		character.initialize()
+
+		battleManager.registerCharacter(
+			character
+		)
+
+	for i in range(
+		enemyParty.characters.size()
+	):
+
+		var character : Character = (
+			enemyParty.characters[i]
+			.duplicate(true)
+		)
+
+		character.team = 1
+
+		if i < team1Positions.size():
+
+			character.position = (
+				team1Positions[i]
+			)
+
+		character.initialize()
+
+		battleManager.registerCharacter(
+			character
+		)

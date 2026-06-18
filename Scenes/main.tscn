@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://0j078qvwgun8"]
+
+[ext_resource type="Script" uid="uid://bhm8qmk2apj3b" path="res://mainScreen.gd" id="1_jjgbg"]
+
+[node name="Node" type="Node" unique_id=1974402326]
+
+[node name="CurrentScreen" type="Node" parent="." unique_id=892512019]
+
+[node name="Control" type="Control" parent="." unique_id=2011595053 node_paths=PackedStringArray("scoreLabel", "winsLabel")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_jjgbg")
+scoreLabel = NodePath("HBoxContainer/Score")
+winsLabel = NodePath("HBoxContainer/Wins")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Control" unique_id=111639188]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 66.0
+theme_override_constants/separation = 20
+
+[node name="Score" type="Label" parent="Control/HBoxContainer" unique_id=1056534611]
+layout_mode = 2
+
+[node name="Wins" type="Label" parent="Control/HBoxContainer" unique_id=757115974]
+layout_mode = 2
