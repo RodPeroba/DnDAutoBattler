@@ -12,7 +12,7 @@ var passives : Array[PassiveData]
 var activeAbility : ActiveData
 @export var chosenAbility : int = 0
 var statuses : Array[StatusEffectData]
-@export var xp : int = 0
+var xp : int = 0
 var battleManager : BattleManager
 var team : int = 0
 
@@ -29,6 +29,14 @@ var rangeDistance : int
 var position : Vector2i
 var target : Character
 
+var damage_flash_time : float = 0.0
+var attack_animation_time : float = 0.0
+var attack_direction : Vector2 = Vector2.ZERO
+
+var projectile_animation_time : float = 0.0
+var projectile_start : Vector2i
+var projectile_target : Vector2i
+
 func initialize():
 	setStats()
 
@@ -42,7 +50,6 @@ func setStats():
 	speed = race.baseSpeed
 	rangeDistance = weapon.rangeDistance
 	activeAbility = characterClass.activeAbilities[chosenAbility]
-
 
 func emitEvent(eventName : String, context : Dictionary = {}):
 	for passive in passives:
@@ -113,6 +120,28 @@ func isTargetInRange() -> bool:
 	var distance = abs(position.x - target.position.x) + abs(position.y - target.position.y)
 	return distance <= rangeDistance
 
+func isRanged() -> bool:
+	return rangeDistance > 1
+	
+func startMeleeAnimation():
+
+	if target == null:
+		return
+
+	attack_animation_time = 0.15
+
+	attack_direction = (target.position - position)
+
+func startProjectileAnimation():
+
+	if target == null:
+		return
+
+	projectile_animation_time = 0.25
+
+	projectile_start = position
+	projectile_target = target.position
+
 func moveToRange():
 	if target == null:
 		return
@@ -139,21 +168,27 @@ func moveToRange():
 func attack():
 	if target == null:
 		return
-	
+
 	var context = {
 		"target": target,
 		"damage": weapon.rollDamage() + baseDamage
 	}
-	
+
 	emitEvent("OnAttack", context)
-	
+
+	if isRanged():
+		startProjectileAnimation()
+	else:
+		startMeleeAnimation()
+
 	Debug.print("%s attacks %s for %d" % [
 		characterClass.className,
 		target.characterClass.className,
 		context["damage"]
 	])
-	
+
 	target.takeDamage(context["damage"], self)
+	
 	
 func useAbility():
 	if activeAbility == null:
@@ -181,6 +216,8 @@ func takeDamage(value : int, attacker : Character = null):
 	
 	if currentHp <= 0:
 		die(attacker)
+	else:
+		damage_flash_time = 0.25
 
 func heal(amount : int):
 	currentHp = min(

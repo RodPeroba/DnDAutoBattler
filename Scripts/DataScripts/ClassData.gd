@@ -9,4 +9,6 @@ class_name ClassData extends Resource
 @export var manaPerAttack : int  = 0
 @export var iniciativeBonus : int = 0
 
+@export var icon : Texture2D
+
 @export var activeAbilities : Array[ActiveData]

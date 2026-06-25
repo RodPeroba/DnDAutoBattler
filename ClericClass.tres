@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dsgso1u0i3ytg" path="res://Scripts/DataScripts/ActiveData.gd" id="1_e7khp"]
 [ext_resource type="Script" uid="uid://cdx3scntb74pg" path="res://Scripts/DataScripts/EffectData.gd" id="2_4s2yb"]
 [ext_resource type="Script" uid="uid://bofhdpmk3ncof" path="res://HealMagicEffect.gd" id="3_lpt8a"]
+[ext_resource type="Texture2D" uid="uid://uuwjm8auahk0" path="res://Assets/mace.png" id="4_4s2yb"]
 [ext_resource type="Script" uid="uid://c5fiw5ml42usf" path="res://Scripts/DataScripts/ClassData.gd" id="4_y1evx"]
 
 [sub_resource type="Resource" id="Resource_ju414"]
@@ -23,5 +24,6 @@ bonusDamage = 2
 mana = 50
 manaPerAttack = 10
 iniciativeBonus = 3
+icon = ExtResource("4_4s2yb")
 activeAbilities = Array[ExtResource("1_e7khp")]([SubResource("Resource_5nml5")])
 metadata/_custom_type_script = "uid://c5fiw5ml42usf"

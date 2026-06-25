@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RaceData" format=3 uid="uid://dp18aqq4f3456"]
+
+[ext_resource type="Texture2D" uid="uid://dqdu48uy1kno2" path="res://Assets/Orc.png" id="1_56f08"]
+[ext_resource type="Script" uid="uid://dhxocm5uvcopf" path="res://Scripts/DataScripts/RaceData.gd" id="2_60o4i"]
+
+[resource]
+script = ExtResource("2_60o4i")
+raceName = "Orc"
+bonusHealth = 15
+baseSpeed = 3
+baseDamage = 25
+icon = ExtResource("1_56f08")
+metadata/_custom_type_script = "uid://dhxocm5uvcopf"
