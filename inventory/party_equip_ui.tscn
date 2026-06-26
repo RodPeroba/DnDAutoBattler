@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://c7carm4ogl83p"]
+
+[ext_resource type="Script" uid="uid://c74cg5quo1j1o" path="res://inventory/party_equip_ui.gd" id="1_ssyh0"]
+[ext_resource type="PackedScene" uid="uid://b6mlnmc6eu3pi" path="res://inventory/equip_single_slot.tscn" id="2_lkliw"]
+
+[node name="Party_Equip_UI" type="Control" unique_id=1499645422]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("1_ssyh0")
+equip_slot_scene = ExtResource("2_lkliw")
+
+[node name="Panel" type="Panel" parent="." unique_id=844069209]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -325.0
+offset_top = -175.0
+offset_right = 325.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel" unique_id=19688265]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

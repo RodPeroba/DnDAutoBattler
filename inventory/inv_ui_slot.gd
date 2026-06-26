@@ -1,31 +1,54 @@
 extends Panel
 
-@onready var item_visual: Sprite2D = $CenterContainer/Panel/item_display
-@onready var amount_text: Label = $CenterContainer/Panel/Label
+var item_visual: Sprite2D
+var amount_text: Label
 
 signal item_changed_slot
+
+@export var only_accept_specific_type: bool = false
+@export var accepted_type: InvItem.ItemType = InvItem.ItemType.NORMAL
 
 var slot_data: InvSlot
 
 func update(slot: InvSlot):
+	get_nodes()
+	
+	if item_visual == null:
+		print("ERRO: item_display não encontrado em ", name)
+		return
+	
+	if amount_text == null:
+		print("ERRO: Label não encontrada em ", name)
+		return
+	
 	slot_data = slot
 	
-	if !slot.item:
+	if slot_data == null or slot_data.item == null:
+		item_visual.texture = null
 		item_visual.visible = false
+		amount_text.text = ""
 		amount_text.visible = false
+		return
+	
+	item_visual.visible = true
+	item_visual.texture = slot_data.item.texture
+	
+	if slot_data.amount > 1:
+		amount_text.visible = true
+		amount_text.text = str(slot_data.amount)
 	else:
-		item_visual.visible = true
-		item_visual.texture = slot.item.texture
-		if slot.amount > 1:
-			amount_text.visible = true
-			amount_text.text = str(slot.amount)
-		else:
-			amount_text.visible = false
+		amount_text.text = ""
+		amount_text.visible = false
 
 
 func _get_drag_data(at_position: Vector2) -> Variant:
+	get_nodes()
+	
 	if slot_data == null or slot_data.item == null:
-		return
+		return null
+	
+	if item_visual == null:
+		return null
 	
 	var preview_control := Control.new()
 	var preview_sprite := Sprite2D.new()
@@ -41,9 +64,16 @@ func _get_drag_data(at_position: Vector2) -> Variant:
 	return slot_data
 
 func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
+	if not data is InvSlot:
+		return false
+	
+	if data.item == null:
+		return false
+	
+	if only_accept_specific_type:
+		return data.item.item_type == accepted_type
+	
 	return true
-	#usar essa função para determinar se vc pode ou não dropar o item
-	#Exemplo: slot específico de armadura somente armadura pode entrar
 	
 func _drop_data(at_position: Vector2, data: Variant) -> void:
 	if data is InvSlot:
@@ -57,3 +87,10 @@ func _drop_data(at_position: Vector2, data: Variant) -> void:
 		data.amount = temp_amount
 
 		item_changed_slot.emit()
+
+func get_nodes():
+	if item_visual == null:
+		item_visual = get_node_or_null("CenterContainer/Panel/item_display")
+	
+	if amount_text == null:
+		amount_text = get_node_or_null("CenterContainer/Panel/Label")

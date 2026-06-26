@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RaceData" format=3 uid="uid://bcqbrmxxg4kwb"]
+
+[ext_resource type="Texture2D" uid="uid://bro83mk083lx7" path="res://Assets/Goblin.png" id="1_e76ut"]
+[ext_resource type="Script" uid="uid://dhxocm5uvcopf" path="res://Scripts/DataScripts/RaceData.gd" id="2_wwxva"]
+
+[resource]
+script = ExtResource("2_wwxva")
+raceName = "Goblin"
+bonusHealth = 15
+baseSpeed = 5
+baseDamage = 15
+icon = ExtResource("1_e76ut")
+metadata/_custom_type_script = "uid://dhxocm5uvcopf"

@@ -1,39 +1,60 @@
 extends Control
 
-@onready var inv: EquipmentInv = preload("res://inventory/equipmentinv.tres")
+var inv: EquipmentInv
 @onready var slots: Array = $NinePatchRect/GridContainer.get_children()
+
+@export var start_closed = true
 
 var is_open = false
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	inv.update.connect(update_slots)
-	
+	custom_minimum_size = Vector2(420, 80)
 	for slot in slots:
 		slot.item_changed_slot.connect(_on_item_changed_slot)
 	
 	update_slots()
-	close()
+	
+	if start_closed:
+		close()
+	else:
+		open()
+
+func set_inventory(new_inv: EquipmentInv):
+	if inv != null and inv.update.is_connected(update_slots):
+		inv.update.disconnect(update_slots)
+	
+	inv = new_inv
+	
+	if inv != null:
+		inv.update.connect(update_slots)
+	
+	update_slots()
 
 func update_slots():
-	for i in range(min(inv.slots.size(), slots.size())):
-		slots[i].update(inv.slots[i])
+	if inv == null:
+		for slot in slots:
+			slot.update(null)
+		return
+	
+	for i in range(slots.size()):
+		if i < inv.slots.size():
+			slots[i].update(inv.slots[i])
+		else:
+			slots[i].update(null)
 
 func open():
 	self.visible = true
+	mouse_filter = Control.MOUSE_FILTER_STOP
 	is_open = true
 
 func close():
 	visible = false
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	is_open = false
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("b"):
-		if is_open:
-			close()
-		else:
-			open()
+	pass
 
 func _on_item_changed_slot():
-	inv.update.emit()
+	if inv != null:
+		inv.update.emit()

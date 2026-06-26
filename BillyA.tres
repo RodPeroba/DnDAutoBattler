@@ -12,5 +12,4 @@ race = ExtResource("3_ogjmu")
 characterClass = ExtResource("2_ttij5")
 weapon = ExtResource("5_narxg")
 armor = ExtResource("1_s0pot")
-level = 10
 metadata/_custom_type_script = "uid://jqc24i724eso"

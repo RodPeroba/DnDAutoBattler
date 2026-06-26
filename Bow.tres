@@ -18,5 +18,4 @@ metadata/_custom_type_script = "uid://da23nic8i1056"
 script = ExtResource("3_jbqg4")
 damage = SubResource("Resource_qogcv")
 rangeDistance = 3
-itemName = "Bow"
 metadata/_custom_type_script = "uid://btpkyikuscuc"

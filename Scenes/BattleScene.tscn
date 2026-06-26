@@ -11,7 +11,8 @@ script = ExtResource("1_b2eky")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=329105817]
 
-[node name="BattleInterface" parent="CanvasLayer" unique_id=208033899 instance=ExtResource("2_hip74")]
+[node name="BattleInterface" parent="CanvasLayer" unique_id=208033899 node_paths=PackedStringArray("equipment_ui") instance=ExtResource("2_hip74")]
+equipment_ui = NodePath("")
 
 [node name="BattleMat" type="Control" parent="CanvasLayer" unique_id=468023995 node_paths=PackedStringArray("world_node")]
 layout_mode = 3

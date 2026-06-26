@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RaceData" format=3 uid="uid://3gqq6q5wjy21"]
+
+[ext_resource type="Texture2D" uid="uid://2hk8688wn3jw" path="res://Assets/Gnomo.png" id="1_6hyvh"]
+[ext_resource type="Script" uid="uid://dhxocm5uvcopf" path="res://Scripts/DataScripts/RaceData.gd" id="2_j7qx0"]
+
+[resource]
+script = ExtResource("2_j7qx0")
+raceName = "Gnome"
+bonusHealth = 20
+baseSpeed = 4
+baseDamage = 15
+icon = ExtResource("1_6hyvh")
+metadata/_custom_type_script = "uid://dhxocm5uvcopf"

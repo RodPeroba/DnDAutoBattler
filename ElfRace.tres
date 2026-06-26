@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RaceData" format=3 uid="uid://7uoiiu56uy3b"]
+
+[ext_resource type="Script" uid="uid://dhxocm5uvcopf" path="res://Scripts/DataScripts/RaceData.gd" id="1_ig5c3"]
+[ext_resource type="Texture2D" uid="uid://dbip2q1y6bhl1" path="res://Assets/Elfo.png" id="1_jekqc"]
+
+[resource]
+script = ExtResource("1_ig5c3")
+raceName = "Elf"
+bonusHealth = 15
+baseSpeed = 4
+baseDamage = 20
+icon = ExtResource("1_jekqc")
+metadata/_custom_type_script = "uid://dhxocm5uvcopf"

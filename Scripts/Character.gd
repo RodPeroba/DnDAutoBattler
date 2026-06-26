@@ -3,8 +3,14 @@ extends Resource
 
 @export var race : RaceData
 @export var characterClass : ClassData
+
+@export var equipment_inv: EquipmentInv
+
 @export var weapon : WeaponData
-@export var armor : ArmorData
+@export var helmet: ArmorData
+@export var chest: ArmorData
+@export var legs: ArmorData
+@export var boots: ArmorData
 @export var level : int = 1
 @export var sprite : Texture2D
 
@@ -12,7 +18,7 @@ var passives : Array[PassiveData]
 var activeAbility : ActiveData
 @export var chosenAbility : int = 0
 var statuses : Array[StatusEffectData]
-@export var xp : int = 0
+var xp : int = 0
 var battleManager : BattleManager
 var team : int = 0
 
@@ -29,6 +35,14 @@ var rangeDistance : int
 var position : Vector2i
 var target : Character
 
+var damage_flash_time : float = 0.0
+var attack_animation_time : float = 0.0
+var attack_direction : Vector2 = Vector2.ZERO
+
+var projectile_animation_time : float = 0.0
+var projectile_start : Vector2i
+var projectile_target : Vector2i
+
 func initialize():
 	setStats()
 
@@ -38,11 +52,18 @@ func setStats():
 	currentMana = 0
 	maxMana = characterClass.mana
 	baseDamage = race.baseDamage + characterClass.bonusDamage * level
-	armorValue = armor.armorValue
+	armorValue = 0
+	if helmet:
+		armorValue += helmet.armorValue
+	if chest:
+		armorValue += chest.armorValue
+	if legs:
+		armorValue += legs.armorValue
+	if boots:
+		armorValue += boots.armorValue
 	speed = race.baseSpeed
 	rangeDistance = weapon.rangeDistance
 	activeAbility = characterClass.activeAbilities[chosenAbility]
-
 
 func emitEvent(eventName : String, context : Dictionary = {}):
 	for passive in passives:
@@ -113,6 +134,28 @@ func isTargetInRange() -> bool:
 	var distance = abs(position.x - target.position.x) + abs(position.y - target.position.y)
 	return distance <= rangeDistance
 
+func isRanged() -> bool:
+	return rangeDistance > 1
+	
+func startMeleeAnimation():
+
+	if target == null:
+		return
+
+	attack_animation_time = 0.15
+
+	attack_direction = (target.position - position)
+
+func startProjectileAnimation():
+
+	if target == null:
+		return
+
+	projectile_animation_time = 0.25
+
+	projectile_start = position
+	projectile_target = target.position
+
 func moveToRange():
 	if target == null:
 		return
@@ -146,6 +189,11 @@ func attack():
 	}
 	
 	emitEvent("OnAttack", context)
+	
+	if isRanged():
+		startProjectileAnimation()
+	else:
+		startMeleeAnimation()
 	
 	Debug.print("%s attacks %s for %d" % [
 		characterClass.className,
@@ -181,6 +229,8 @@ func takeDamage(value : int, attacker : Character = null):
 	
 	if currentHp <= 0:
 		die(attacker)
+	else:
+		damage_flash_time = 0.25
 
 func heal(amount : int):
 	currentHp = min(

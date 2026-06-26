@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RaceData" format=3 uid="uid://bclu783cjpqsl"]
+
+[ext_resource type="Texture2D" uid="uid://bm8gwfmqj1g57" path="res://Assets/Anao.png" id="1_o6531"]
+[ext_resource type="Script" uid="uid://dhxocm5uvcopf" path="res://Scripts/DataScripts/RaceData.gd" id="2_lqj67"]
+
+[resource]
+script = ExtResource("2_lqj67")
+raceName = "Dwarf"
+bonusHealth = 30
+baseSpeed = 2
+baseDamage = 15
+icon = ExtResource("1_o6531")
+metadata/_custom_type_script = "uid://dhxocm5uvcopf"

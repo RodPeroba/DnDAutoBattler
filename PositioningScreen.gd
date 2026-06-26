@@ -4,6 +4,9 @@ extends Control
 @export var infoLabel : Label
 @export var confirmButton : Button
 
+@onready var inv_ui = $Inv_UI
+@onready var party_equip_ui = $Party_Equip_UI
+
 var selectedCharacter : Character
 
 var validDeployPositions : Array[Vector2i] = [
@@ -35,26 +38,57 @@ func _ready():
 
 			character.position = validDeployPositions[i]
 
+	if GameManager.playerParty.characters.size() > 0:
+		selectedCharacter = GameManager.playerParty.characters[0]
+		GameManager.selectCharacter(selectedCharacter)
+
 	boardView.queue_redraw()
+	updateInfo()
 
 func _input(event):
-
 	if GameManager.currentState != GameManager.GameState.POSITIONING:
 		return
 
-	if event is InputEventMouseButton:
+	if event.is_action_pressed("i"):
+		toggle_inventories()
+		return
 
+	if event is InputEventMouseButton:
 		if !event.pressed:
 			return
 
 		if event.button_index != MOUSE_BUTTON_LEFT:
 			return
 
-		var tile = boardView.screenToTile(
-			event.position
-		)
-
+		var tile = boardView.screenToTile(event.position)
 		handleTileClick(tile)
+
+func toggle_inventories():
+	if inv_ui == null:
+		print("ERRO: inv_ui está null")
+		return
+
+	if party_equip_ui == null:
+		print("ERRO: party_equip_ui está null")
+		return
+
+	var should_close = inv_ui.is_open or party_equip_ui.is_open
+
+	if should_close:
+		inv_ui.close()
+		party_equip_ui.close()
+	else:
+		inv_ui.open()
+		party_equip_ui.open()
+
+		inv_ui.z_index = 200
+		party_equip_ui.z_index = 201
+
+		inv_ui.move_to_front()
+		party_equip_ui.move_to_front()
+
+	print("Inv aberto: ", inv_ui.is_open, " visible: ", inv_ui.visible)
+	print("Equip aberto: ", party_equip_ui.is_open, " visible: ", party_equip_ui.visible)
 
 func handleTileClick(tile : Vector2i):
 
@@ -64,6 +98,7 @@ func handleTileClick(tile : Vector2i):
 		if character.position == tile:
 
 			selectedCharacter = character
+			GameManager.selectCharacter(character)
 
 			updateInfo()
 

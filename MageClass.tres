@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cdx3scntb74pg" path="res://Scripts/DataScripts/EffectData.gd" id="2_4duc4"]
 [ext_resource type="Script" uid="uid://c5fiw5ml42usf" path="res://Scripts/DataScripts/ClassData.gd" id="2_httaf"]
 [ext_resource type="Script" uid="uid://bumn1i4ixtdsh" path="res://FireballEffect.gd" id="3_w5fqw"]
+[ext_resource type="Texture2D" uid="uid://7t2j11aayv0f" path="res://Assets/wand.png" id="4_w5fqw"]
 
 [sub_resource type="Resource" id="Resource_gqem5"]
 script = ExtResource("3_w5fqw")
@@ -24,5 +25,6 @@ bonusDamage = 5
 mana = 50
 manaPerAttack = 10
 iniciativeBonus = 5
+icon = ExtResource("4_w5fqw")
 activeAbilities = Array[ExtResource("1_0idst")]([SubResource("Resource_d4ng8")])
 metadata/_custom_type_script = "uid://c5fiw5ml42usf"

@@ -18,8 +18,8 @@ script = ExtResource("1_6kgic")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=2075150370]
 layout_mode = 0
-offset_right = 33.0
-offset_bottom = 90.0
+offset_right = 61.0
+offset_bottom = 98.0
 texture = ExtResource("2_y5vwi")
 patch_margin_left = 6
 patch_margin_top = 6
@@ -33,21 +33,55 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -8.0
+offset_left = -21.5
 offset_top = -38.0
-offset_right = 8.0
+offset_right = -5.5
 offset_bottom = 38.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="inv_UI_slot" parent="NinePatchRect/GridContainer" unique_id=245840624 instance=ExtResource("3_xkwb7")]
 layout_mode = 2
+only_accept_specific_type = true
+accepted_type = 1
 
 [node name="inv_UI_slot2" parent="NinePatchRect/GridContainer" unique_id=1544471849 instance=ExtResource("3_xkwb7")]
 layout_mode = 2
+only_accept_specific_type = true
+accepted_type = 2
 
 [node name="inv_UI_slot3" parent="NinePatchRect/GridContainer" unique_id=1299682805 instance=ExtResource("3_xkwb7")]
 layout_mode = 2
+only_accept_specific_type = true
+accepted_type = 3
 
 [node name="inv_UI_slot4" parent="NinePatchRect/GridContainer" unique_id=924042423 instance=ExtResource("3_xkwb7")]
 layout_mode = 2
+only_accept_specific_type = true
+accepted_type = 4
+
+[node name="GridContainer2" type="GridContainer" parent="NinePatchRect" unique_id=1047772657]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 4.5
+offset_top = -38.0
+offset_right = 20.5
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="inv_UI_slot" parent="NinePatchRect/GridContainer2" unique_id=322245856 instance=ExtResource("3_xkwb7")]
+layout_mode = 2
+only_accept_specific_type = true
+accepted_type = 5
+
+[node name="Label" type="Label" parent="NinePatchRect" unique_id=1031221131]
+layout_mode = 0
+offset_right = 61.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1

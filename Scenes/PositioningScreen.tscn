@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://dgj0skyunewuu" path="res://Scenes/BoardView.tscn" id="1_phwps"]
 [ext_resource type="Script" uid="uid://dn5bo4htruh1c" path="res://PositioningScreen.gd" id="1_xe3uy"]
+[ext_resource type="PackedScene" uid="uid://c7carm4ogl83p" path="res://inventory/party_equip_ui.tscn" id="3_okvw1"]
+[ext_resource type="PackedScene" uid="uid://c8w5gb5g74prv" path="res://inventory/inv_ui.tscn" id="4_g7v4k"]
 
 [node name="Control" type="Control" unique_id=1603857523 node_paths=PackedStringArray("boardView", "infoLabel", "confirmButton")]
 layout_mode = 3
@@ -43,5 +45,11 @@ theme_override_font_sizes/font_size = 32
 text = "Iniciar Batalha"
 
 [node name="Node2D" parent="." unique_id=1151715297 instance=ExtResource("1_phwps")]
+
+[node name="Inv_UI" parent="." unique_id=975103152 instance=ExtResource("4_g7v4k")]
+layout_mode = 1
+
+[node name="Party_Equip_UI" parent="." unique_id=1499645422 instance=ExtResource("3_okvw1")]
+layout_mode = 1
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -30,6 +30,8 @@ var battlesWon : int = 0
 const turnDelay : float = 0.5
 var turnTimer : float = 0.0
 
+var gold: int = 0
+
 func _ready():
 
 	randomize()
@@ -87,6 +89,44 @@ func changeScreen(
 	container.add_child(
 		currentScreen
 	)
+	
+	
+func applyRewards():
+	var baseGold = 20
+
+	var aliveBonus = battleManager.getAliveCount(0) * 5
+	var streakBonus = battlesWon * 10
+
+	var earnedGold = baseGold + aliveBonus + streakBonus
+
+	gold += earnedGold
+
+	Debug.print("Gold earned: %d" % earnedGold)
+	Debug.print("Total gold: %d" % gold)
+	
+
+func checkLevelUp(character: Character) -> void:
+	var xp_needed = character.level * 100
+	
+	while character.xp >= xp_needed:
+		character.xp -= xp_needed
+		character.level += 1
+		xp_needed = character.level * 100
+		
+		Debug.print("leveled up to %d" % [character.level])
+
+	
+func applyXPRewards():
+	var baseXP = 30
+
+	for character in playerParty.characters:
+		var xpGain = baseXP + battlesWon * 5
+		character.xp += xpGain
+
+		checkLevelUp(character)
+
+	Debug.print("XP applied to party")
+
 
 func enterStage():
 
@@ -175,36 +215,20 @@ func handleVictory():
 
 	battlesWon += 1
 
-	var earnedScore = (
-		calculateBattleScore()
-	)
-
+	var earnedScore = calculateBattleScore()
 	score += earnedScore
+
+	applyRewards()
+	applyXPRewards()
 
 	currentState = GameState.VICTORY
 
-	Debug.print(
-		"=== VICTORY ==="
-	)
+	Debug.print("=== VICTORY ===")
+	Debug.print("Battle Score: %d" % earnedScore)
+	Debug.print("Total Score: %d" % score)
+	Debug.print("Battles Won: %d" % battlesWon)
 
-	Debug.print(
-		"Battle Score: %d"
-		% earnedScore
-	)
-
-	Debug.print(
-		"Total Score: %d"
-		% score
-	)
-
-	Debug.print(
-		"Battles Won: %d"
-		% battlesWon
-	)
-
-	changeScreen(
-		VICTORY_SCREEN
-	)
+	changeScreen(VICTORY_SCREEN)
 
 func calculateBattleScore() -> int:
 

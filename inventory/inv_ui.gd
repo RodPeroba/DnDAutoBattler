@@ -3,37 +3,56 @@ extends Control
 @onready var inv: Inv = preload("res://inventory/playerinv.tres")
 @onready var slots: Array = $NinePatchRect/GridContainer.get_children()
 
-var is_open = false
+var is_open := false
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	inv.update.connect(update_slots)
-	
-	for slot in slots:
-		slot.item_changed_slot.connect(_on_item_changed_slot)
-	
-	update_slots()
-	close()
-
-func update_slots():
-	for i in range(min(inv.slots.size(), slots.size())):
-		slots[i].update(inv.slots[i])
-
-func open():
-	self.visible = true
-	is_open = true
-
-func close():
 	visible = false
 	is_open = false
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("i"):
-		if is_open:
-			close()
-		else:
-			open()
+	mouse_filter = Control.MOUSE_FILTER_STOP
 
-func _on_item_changed_slot():
-	inv.update.emit()
+	if inv != null:
+		inv.update.connect(update_slots)
+
+	for slot in slots:
+		if slot.has_signal("item_changed_slot"):
+			slot.item_changed_slot.connect(_on_item_changed_slot)
+
+	update_slots()
+
+
+func update_slots() -> void:
+	if inv == null:
+		return
+
+	for i in range(min(inv.slots.size(), slots.size())):
+		slots[i].update(inv.slots[i])
+
+
+func open() -> void:
+	update_slots()
+
+	visible = true
+	show()
+	is_open = true
+
+	mouse_filter = Control.MOUSE_FILTER_STOP
+	z_index = 200
+	move_to_front()
+
+	print("INV_UI ABERTO | visible:", visible, " global_position:", global_position, " size:", size)
+
+
+func close() -> void:
+	visible = false
+	hide()
+	is_open = false
+
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	print("INV_UI FECHADO")
+
+
+func _on_item_changed_slot() -> void:
+	if inv != null:
+		inv.update.emit()

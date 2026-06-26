@@ -7,19 +7,27 @@
 [node name="Inv_UI" type="Control" unique_id=1166234297]
 custom_minimum_size = Vector2(82, 61)
 layout_mode = 3
-anchors_preset = 15
+anchor_left = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -1070.0
-offset_bottom = -587.0
-grow_horizontal = 2
+anchor_bottom = 0.5
+offset_left = -442.0
+offset_top = -145.0
+offset_right = -360.0
+offset_bottom = -84.0
+grow_horizontal = 0
 grow_vertical = 2
+scale = Vector2(5, 5)
+mouse_filter = 2
 script = ExtResource("1_f2u1w")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=2075150370]
-layout_mode = 0
-offset_right = 82.0
-offset_bottom = 61.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_w82yi")
 patch_margin_left = 6
 patch_margin_top = 6
