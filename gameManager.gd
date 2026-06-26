@@ -24,6 +24,8 @@ var battleManager : BattleManager
 var playerParty : PartyData
 var enemyParty : PartyData
 
+var selectedCharacter : Character = null
+
 var score : int = 0
 var battlesWon : int = 0
 
@@ -308,6 +310,15 @@ func loadBattle(
 	enemyParty = enemyData
 
 	enterPositioning()
+
+func selectCharacter(character : Character) -> void:
+	selectedCharacter = character
+
+	if character == null:
+		Debug.print("Selected character: none")
+		return
+
+	Debug.print("Selected character: %s" % character.characterClass.className)
 
 func createBattleCharacters():
 
