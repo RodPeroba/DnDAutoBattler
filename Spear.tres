@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bmdkiri8u1e3s" path="res://Scripts/DiceTerm.gd" id="1_ud88r"]
 [ext_resource type="Script" uid="uid://da23nic8i1056" path="res://Scripts/DiceExpression.gd" id="2_b2oln"]
 [ext_resource type="Script" uid="uid://btpkyikuscuc" path="res://Scripts/DataScripts/WeaponData.gd" id="3_j8sl4"]
+[ext_resource type="Texture2D" uid="uid://co12su5cx0oe3" path="res://Assets/mace_05.png" id="4_b2oln"]
 
 [sub_resource type="Resource" id="Resource_y177x"]
 script = ExtResource("1_ud88r")
@@ -18,4 +19,6 @@ metadata/_custom_type_script = "uid://da23nic8i1056"
 script = ExtResource("3_j8sl4")
 damage = SubResource("Resource_4pc4b")
 rangeDistance = 1
+texture = ExtResource("4_b2oln")
+item_type = 5
 metadata/_custom_type_script = "uid://btpkyikuscuc"

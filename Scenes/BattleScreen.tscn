@@ -1,18 +1,22 @@
 [gd_scene format=3 uid="uid://crmyy0hx6pa0u"]
 
 [ext_resource type="PackedScene" uid="uid://dgj0skyunewuu" path="res://Scenes/BoardView.tscn" id="1_41ces"]
+[ext_resource type="Theme" uid="uid://dfnvyobjw4ntc" path="res://GameTheme.tres" id="1_egjul"]
 [ext_resource type="Script" uid="uid://di12neft2qqg2" path="res://BattleScreen.gd" id="1_n3o6y"]
 
-[node name="Control" type="Control" unique_id=1350881296 node_paths=PackedStringArray("battleInfo", "combatLog")]
+[node name="Control" type="Control" unique_id=1350881296 node_paths=PackedStringArray("battleInfo", "combatLog", "pauseButton", "SpeedButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_egjul")
 script = ExtResource("1_n3o6y")
 battleInfo = NodePath("Info")
 combatLog = NodePath("CombatLog")
+pauseButton = NodePath("Control/Pause")
+SpeedButton = NodePath("Control/Speed")
 
 [node name="Info" type="Label" parent="." unique_id=309626431]
 layout_mode = 1
@@ -36,3 +40,28 @@ grow_horizontal = 0
 grow_vertical = 0
 
 [node name="Node2D" parent="." unique_id=1151715297 instance=ExtResource("1_41ces")]
+
+[node name="Control" type="HBoxContainer" parent="." unique_id=346419083]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -26.5
+offset_right = 158.0
+offset_bottom = 26.5
+grow_vertical = 2
+theme_override_constants/separation = 4
+
+[node name="Pause" type="Button" parent="Control" unique_id=17156060]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "PAUSE"
+
+[node name="Speed" type="Button" parent="Control" unique_id=1557403959]
+layout_mode = 2
+theme_override_font_sizes/font_size = 39
+text = "1x"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="Control/Pause" to="." method="_on_pause_pressed"]
+[connection signal="pressed" from="Control/Speed" to="." method="_on_speed_pressed"]

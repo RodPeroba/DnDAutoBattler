@@ -4,8 +4,11 @@
 [ext_resource type="Script" uid="uid://bushahf63j024" path="res://PartyData.gd" id="2_nn1n1"]
 [ext_resource type="Resource" uid="uid://dgrk6auv46chk" path="res://JorgeW.tres" id="3_mxtd8"]
 [ext_resource type="Resource" uid="uid://5hkqpk2k28d0" path="res://BillyA.tres" id="3_yloia"]
+[ext_resource type="Resource" uid="uid://dicy8uq2vscai" path="res://RaulM.tres" id="4_yloia"]
+[ext_resource type="Resource" uid="uid://bvfhm8s8p0ntn" path="res://LeaoC.tres" id="5_la7a7"]
+[ext_resource type="Resource" uid="uid://dy8r7khijex0u" path="res://inventory/equipmentinv.tres" id="6_3eqrn"]
 
 [resource]
 script = ExtResource("2_nn1n1")
-characters = Array[ExtResource("1_5yi8p")]([ExtResource("3_yloia"), ExtResource("3_mxtd8")])
+characters = Array[ExtResource("1_5yi8p")]([ExtResource("3_yloia"), ExtResource("3_mxtd8"), ExtResource("4_yloia"), ExtResource("5_la7a7")])
 metadata/_custom_type_script = "uid://bushahf63j024"

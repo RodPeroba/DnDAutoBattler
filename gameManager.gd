@@ -24,52 +24,135 @@ var battleManager : BattleManager
 var playerParty : PartyData
 var enemyParty : PartyData
 
+var encounterGenerator : EncounterGenerator
+var enemyDatabase : EnemyDatabase
+
 var selectedCharacter : Character = null
 
 var score : int = 0
 var battlesWon : int = 0
 
-const turnDelay : float = 0.5
+const BASE_TURN_DELAY := 0.5
+
+var battleSpeed : float = 1.0
+var battlePaused : bool = false
+
 var turnTimer : float = 0.0
 
 var gold: int = 0
 
-func _ready():
+var lastGoldReward: int = 0
+var lastXPReward: int = 0
+var lastScoreReward: int = 0
 
+
+
+func _ready():
 	randomize()
 
 	startGame()
 
 func _process(delta):
-
 	if currentState != GameState.BATTLE:
 		return
 
 	if battleManager == null:
 		return
 
+	if battlePaused:
+		return
+
 	turnTimer += delta
 
-	if turnTimer >= turnDelay:
+	var currentDelay = BASE_TURN_DELAY / battleSpeed
+
+	if turnTimer >= currentDelay:
 
 		turnTimer = 0.0
 
 		battleManager.nextTurn()
 
+func setBattleSpeed(speed : float):
+	battleSpeed = max(speed, 0.1)
+
+	Debug.print(
+		"Battle Speed: %.1fx"
+		% battleSpeed
+	)
+
+func cycleBattleSpeed():
+	match battleSpeed:
+
+		1.0:
+			battleSpeed = 2.0
+
+		2.0:
+			battleSpeed = 4.0
+
+		4.0:
+			battleSpeed = 8.0
+
+		_:
+			battleSpeed = 1.0
+
+	Debug.print(
+		"Battle Speed: %.0fx"
+		% battleSpeed
+	)
+	
+func togglePause():
+	battlePaused = !battlePaused
+
+	Debug.print(
+		"Battle Paused: %s"
+		% battlePaused
+	)
+
+func pauseBattle():
+	battlePaused = true
+
+func resumeBattle():
+	battlePaused = false
+
+func isBattlePaused() -> bool:
+	return battlePaused
+
+func getBattleSpeed() -> float:
+	return battleSpeed
+
+func resetBattleControls():
+	battlePaused = false
+	battleSpeed = 1.0
+	turnTimer = 0.0
+
 func startGame():
 
 	score = 0
 	battlesWon = 0
+	
+	gold = 0
+
+	lastGoldReward = 0
+	lastXPReward = 0
+	lastScoreReward = 0
 
 	Debug.print("=== GAME START ===")
 
-	playerParty = load(
-		"res://PlayerParty.tres"
-	)
+	var baseParty = load("res://PlayerParty.tres")
+	playerParty = baseParty.duplicate(true)
 
-	enemyParty = load(
-		"res://EnemyParty.tres"
-	)
+	var newCharacters : Array[Character] = []
+
+	for character in playerParty.characters:
+		newCharacters.append(character.duplicate(true))
+
+	playerParty.characters = newCharacters
+
+	enemyDatabase = load("res://EnemyDatabase.tres")
+
+	encounterGenerator = EncounterGenerator.new(enemyDatabase)
+
+	enemyParty = encounterGenerator.generateParty(battlesWon)
 
 	enterStage()
 
@@ -94,18 +177,12 @@ func changeScreen(
 	
 	
 func applyRewards():
-	var baseGold = 20
+	lastGoldReward = encounterGenerator.getTotalGoldReward()
 
-	var aliveBonus = battleManager.getAliveCount(0) * 5
-	var streakBonus = battlesWon * 10
+	gold += lastGoldReward
 
-	var earnedGold = baseGold + aliveBonus + streakBonus
-
-	gold += earnedGold
-
-	Debug.print("Gold earned: %d" % earnedGold)
+	Debug.print("Gold earned: %d" % lastGoldReward)
 	Debug.print("Total gold: %d" % gold)
-	
 
 func checkLevelUp(character: Character) -> void:
 	var xp_needed = character.level * 100
@@ -119,15 +196,13 @@ func checkLevelUp(character: Character) -> void:
 
 	
 func applyXPRewards():
-	var baseXP = 30
+	lastXPReward = encounterGenerator.getTotalXPReward()
 
 	for character in playerParty.characters:
-		var xpGain = baseXP + battlesWon * 5
-		character.xp += xpGain
+
+		character.xp += lastXPReward
 
 		checkLevelUp(character)
-
-	Debug.print("XP applied to party")
 
 
 func enterStage():
@@ -164,7 +239,8 @@ func enterPositioning():
 	)
 
 func confirmPositioning():
-
+	enemyParty = encounterGenerator.generateParty(battlesWon)
+	
 	startBattle()
 
 func startBattle():
@@ -175,7 +251,7 @@ func startBattle():
 
 	currentState = GameState.BATTLE
 
-	turnTimer = 0.0
+	resetBattleControls()
 
 	battleManager = BattleManager.new()
 
@@ -218,17 +294,15 @@ func handleVictory():
 	battlesWon += 1
 
 	var earnedScore = calculateBattleScore()
+
+	lastScoreReward = earnedScore
+
 	score += earnedScore
 
 	applyRewards()
 	applyXPRewards()
 
 	currentState = GameState.VICTORY
-
-	Debug.print("=== VICTORY ===")
-	Debug.print("Battle Score: %d" % earnedScore)
-	Debug.print("Total Score: %d" % score)
-	Debug.print("Battles Won: %d" % battlesWon)
 
 	changeScreen(VICTORY_SCREEN)
 

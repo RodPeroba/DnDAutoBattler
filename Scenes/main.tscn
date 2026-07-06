@@ -1,8 +1,40 @@
 [gd_scene format=3 uid="uid://0j078qvwgun8"]
 
+[ext_resource type="Texture2D" uid="uid://dt7n02ek24bdl" path="res://Assets/vecteezy_detail-brown-wood-texture-background_11641968.jpg" id="1_8gbba"]
 [ext_resource type="Script" uid="uid://bhm8qmk2apj3b" path="res://mainScreen.gd" id="1_jjgbg"]
+[ext_resource type="Texture2D" uid="uid://j44our0fy678" path="res://Assets/vecteezy_old-paper-texture_11117352.png" id="2_8gbba"]
+[ext_resource type="Theme" uid="uid://dfnvyobjw4ntc" path="res://GameTheme.tres" id="3_jjvhh"]
 
 [node name="Node" type="Node" unique_id=1974402326]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1058109753]
+z_index = -10
+z_as_relative = false
+texture_repeat = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_8gbba")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=465511457]
+z_index = -9
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -300.0
+offset_right = 300.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8gbba")
+expand_mode = 1
 
 [node name="CurrentScreen" type="Node" parent="." unique_id=892512019]
 
@@ -11,6 +43,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+theme = ExtResource("3_jjvhh")
 script = ExtResource("1_jjgbg")
 scoreLabel = NodePath("HBoxContainer/Score")
 winsLabel = NodePath("HBoxContainer/Wins")

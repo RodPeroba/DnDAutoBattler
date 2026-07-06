@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ArmorData" format=3 uid="uid://by3o83fnfan1s"]
+
+[ext_resource type="Script" uid="uid://dqb6p0yb8th65" path="res://Scripts/DataScripts/ArmorData.gd" id="1_hnnl0"]
+[ext_resource type="Texture2D" uid="uid://lf6jwimi4b0f" path="res://Assets/Armors/chestgear_02.png" id="2_c45qj"]
+
+[resource]
+script = ExtResource("1_hnnl0")
+armorValue = 4
+texture = ExtResource("2_c45qj")
+item_type = 2
+metadata/_custom_type_script = "uid://dqb6p0yb8th65"

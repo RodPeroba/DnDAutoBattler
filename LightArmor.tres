@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="ArmorData" format=3 uid="uid://ccp0fvcoxaf1b"]
-
-[ext_resource type="Script" uid="uid://dqb6p0yb8th65" path="res://Scripts/DataScripts/ArmorData.gd" id="1_4hl4r"]
-
-[resource]
-script = ExtResource("1_4hl4r")
-armorValue = 20
-itemName = "Light Armor"
-metadata/_custom_type_script = "uid://dqb6p0yb8th65"

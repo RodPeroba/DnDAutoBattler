@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://d2vvwq6b31s4a"]
 
+[ext_resource type="Theme" uid="uid://dfnvyobjw4ntc" path="res://GameTheme.tres" id="1_2emqa"]
 [ext_resource type="Script" uid="uid://qo7qxx873xem" path="res://GameOverScreen.gd" id="1_d4r0f"]
 
 [node name="Control" type="Control" unique_id=458134390]
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_2emqa")
 script = ExtResource("1_d4r0f")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1298231382]

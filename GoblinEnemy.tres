@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://c5nqybyjoodeu"]
+
+[ext_resource type="Resource" uid="uid://cmp2cfynrerbc" path="res://LightArmorBoots.tres" id="1_3hcnf"]
+[ext_resource type="Resource" uid="uid://pm8e4plfyivp" path="res://WarriorClass.tres" id="2_1002w"]
+[ext_resource type="Resource" uid="uid://cnn5rkp3ecmbf" path="res://SimpleArmorHelme.tres" id="3_el6aq"]
+[ext_resource type="Resource" uid="uid://dy8r7khijex0u" path="res://inventory/equipmentinv.tres" id="4_2fnxk"]
+[ext_resource type="Resource" uid="uid://cnn5rkp3ecmbf" path="res://SimpleArmorHelme.tres" id="5_vlpgh"]
+[ext_resource type="Resource" uid="uid://cnn5rkp3ecmbf" path="res://SimpleArmorHelme.tres" id="6_aja0a"]
+[ext_resource type="Resource" uid="uid://bcqbrmxxg4kwb" path="res://GoblinRace.tres" id="7_81fv4"]
+[ext_resource type="Script" uid="uid://jqc24i724eso" path="res://Scripts/Character.gd" id="8_mjhtp"]
+[ext_resource type="Resource" uid="uid://brgub35tcckcs" path="res://Spear.tres" id="9_vd17q"]
+[ext_resource type="Script" uid="uid://ib7yp41u5qsn" path="res://EnemyData.gd" id="10_xmxgr"]
+
+[sub_resource type="Resource" id="Resource_cjd0d"]
+script = ExtResource("8_mjhtp")
+race = ExtResource("7_81fv4")
+characterClass = ExtResource("2_1002w")
+equipment_inv = ExtResource("4_2fnxk")
+weapon = ExtResource("9_vd17q")
+helmet = ExtResource("5_vlpgh")
+chest = ExtResource("3_el6aq")
+legs = ExtResource("6_aja0a")
+boots = ExtResource("1_3hcnf")
+metadata/_custom_type_script = "uid://jqc24i724eso"
+
+[resource]
+script = ExtResource("10_xmxgr")
+character = SubResource("Resource_cjd0d")
+metadata/_custom_type_script = "uid://ib7yp41u5qsn"

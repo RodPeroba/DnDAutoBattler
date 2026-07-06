@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyDatabase" format=3 uid="uid://dmw2amogufot5"]
+
+[ext_resource type="Script" uid="uid://ib7yp41u5qsn" path="res://EnemyData.gd" id="1_ligpu"]
+[ext_resource type="Script" uid="uid://c7q0qsisqn2ka" path="res://EnemyDatabase.gd" id="2_va0u3"]
+[ext_resource type="Resource" uid="uid://c5nqybyjoodeu" path="res://GoblinEnemy.tres" id="2_yjjjb"]
+[ext_resource type="Resource" uid="uid://hya06xs0t5e6" path="res://OrcEnemy.tres" id="3_0sros"]
+[ext_resource type="Resource" uid="uid://djailj7gflbkr" path="res://CultistEnemy.tres" id="4_htd2i"]
+[ext_resource type="Resource" uid="uid://chxlcjwbyo2ik" path="res://EvilMageEnemy.tres" id="5_bvob5"]
+
+[resource]
+script = ExtResource("2_va0u3")
+enemies = Array[ExtResource("1_ligpu")]([ExtResource("2_yjjjb"), ExtResource("3_0sros"), ExtResource("4_htd2i"), ExtResource("5_bvob5")])
+metadata/_custom_type_script = "uid://c7q0qsisqn2ka"

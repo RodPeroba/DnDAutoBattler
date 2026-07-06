@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bmdkiri8u1e3s" path="res://Scripts/DiceTerm.gd" id="1_i6knp"]
 [ext_resource type="Script" uid="uid://da23nic8i1056" path="res://Scripts/DiceExpression.gd" id="2_w5uth"]
 [ext_resource type="Script" uid="uid://btpkyikuscuc" path="res://Scripts/DataScripts/WeaponData.gd" id="3_1nqhc"]
+[ext_resource type="Texture2D" uid="uid://bupfunf25pdx6" path="res://Assets/scepter_01.png" id="4_w5uth"]
 
 [sub_resource type="Resource" id="Resource_h5vpt"]
 script = ExtResource("1_i6knp")
@@ -18,4 +19,6 @@ metadata/_custom_type_script = "uid://da23nic8i1056"
 script = ExtResource("3_1nqhc")
 damage = SubResource("Resource_cx2al")
 rangeDistance = 3
+texture = ExtResource("4_w5uth")
+item_type = 5
 metadata/_custom_type_script = "uid://btpkyikuscuc"

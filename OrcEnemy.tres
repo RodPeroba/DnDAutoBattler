@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://hya06xs0t5e6"]
+
+[ext_resource type="Resource" uid="uid://cnn5rkp3ecmbf" path="res://SimpleArmorHelme.tres" id="1_4cg26"]
+[ext_resource type="Script" uid="uid://ib7yp41u5qsn" path="res://EnemyData.gd" id="1_kggkn"]
+[ext_resource type="Resource" uid="uid://pm8e4plfyivp" path="res://WarriorClass.tres" id="2_7kwke"]
+[ext_resource type="Resource" uid="uid://cnn5rkp3ecmbf" path="res://SimpleArmorHelme.tres" id="3_p7vsy"]
+[ext_resource type="Resource" uid="uid://dy8r7khijex0u" path="res://inventory/equipmentinv.tres" id="4_nshwp"]
+[ext_resource type="Resource" uid="uid://cnn5rkp3ecmbf" path="res://SimpleArmorHelme.tres" id="5_8iwdi"]
+[ext_resource type="Resource" uid="uid://cnn5rkp3ecmbf" path="res://SimpleArmorHelme.tres" id="6_xr6ul"]
+[ext_resource type="Resource" uid="uid://dp18aqq4f3456" path="res://OrcRace.tres" id="7_4dlf4"]
+[ext_resource type="Script" uid="uid://jqc24i724eso" path="res://Scripts/Character.gd" id="8_e21r8"]
+[ext_resource type="Resource" uid="uid://bl4qrekpygcri" path="res://Sword.tres" id="9_2s5pv"]
+
+[sub_resource type="Resource" id="Resource_c70aw"]
+script = ExtResource("8_e21r8")
+race = ExtResource("7_4dlf4")
+characterClass = ExtResource("2_7kwke")
+equipment_inv = ExtResource("4_nshwp")
+weapon = ExtResource("9_2s5pv")
+helmet = ExtResource("5_8iwdi")
+chest = ExtResource("3_p7vsy")
+legs = ExtResource("6_xr6ul")
+boots = ExtResource("1_4cg26")
+level = 2
+metadata/_custom_type_script = "uid://jqc24i724eso"
+
+[resource]
+script = ExtResource("1_kggkn")
+character = SubResource("Resource_c70aw")
+difficulty = 2
+goldReward = 30
+xpReward = 40
+canAppearFromBattle = 1
+weight = 8
+metadata/_custom_type_script = "uid://ib7yp41u5qsn"

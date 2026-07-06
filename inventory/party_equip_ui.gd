@@ -2,7 +2,7 @@ extends Control
 
 @export var equip_slot_scene: PackedScene
 
-@onready var panel: Panel = $Panel
+@onready var panel: PanelContainer = $Panel
 @onready var list_container: HBoxContainer = $Panel/HBoxContainer
 
 var is_open := false
@@ -17,7 +17,7 @@ func _ready() -> void:
 	panel.visible = true
 
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.03, 0.03, 0.03, 0.95)
+	style.bg_color = Color("dca464")
 	style.border_color = Color(0.8, 0.8, 0.8, 1.0)
 	style.set_border_width_all(2)
 	style.set_corner_radius_all(8)
@@ -26,70 +26,59 @@ func _ready() -> void:
 	close()
 
 
-func refresh() -> void:
+func refresh():
+
 	for child in list_container.get_children():
 		child.queue_free()
 
 	if GameManager.playerParty == null:
 		return
 
-	if equip_slot_scene == null:
-		print("ERRO: equip_slot_scene não definido no Party_Equip_UI")
-		return
-
 	for character in GameManager.playerParty.characters:
-		if character.equipment_inv == null:
-			GameManager.selectCharacter(character)
-
-		if character.equipment_inv == null:
-			print("ERRO: personagem sem equipment_inv")
-			continue
 
 		var character_box := VBoxContainer.new()
 		character_box.custom_minimum_size = Vector2(180, 260)
 		character_box.add_theme_constant_override("separation", 8)
 
 		var name_label := Label.new()
-		name_label.custom_minimum_size = Vector2(180, 28)
 		name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-
-		if character.characterClass != null:
-			name_label.text = character.characterClass.className
-		else:
-			name_label.text = "Character"
+		name_label.text = character.characterClass.className
 
 		character_box.add_child(name_label)
 
 		var equipment_columns := HBoxContainer.new()
-		equipment_columns.custom_minimum_size = Vector2(180, 220)
 		equipment_columns.add_theme_constant_override("separation", 24)
 
 		var armor_column := VBoxContainer.new()
-		armor_column.custom_minimum_size = Vector2(72, 220)
 		armor_column.add_theme_constant_override("separation", 8)
 
 		var weapon_column := VBoxContainer.new()
-		weapon_column.custom_minimum_size = Vector2(72, 220)
 		weapon_column.add_theme_constant_override("separation", 8)
 
-		var equipment_slots = character.equipment_inv.slots
+		# ---------- Helmet ----------
+		var helmet_slot = equip_slot_scene.instantiate()
+		helmet_slot.update(character.helmet)
+		armor_column.add_child(helmet_slot)
 
-		for i in range(equipment_slots.size()):
-			var slot_ui = equip_slot_scene.instantiate()
-			slot_ui.custom_minimum_size = Vector2(48, 48)
+		# ---------- Chest ----------
+		var chest_slot = equip_slot_scene.instantiate()
+		chest_slot.update(character.chest)
+		armor_column.add_child(chest_slot)
 
-			if i < 4:
-				armor_column.add_child(slot_ui)
-			elif i == 4:
-				weapon_column.add_child(slot_ui)
-			else:
-				slot_ui.queue_free()
-				continue
+		# ---------- Legs ----------
+		var legs_slot = equip_slot_scene.instantiate()
+		legs_slot.update(character.legs)
+		armor_column.add_child(legs_slot)
 
-			slot_ui.update(equipment_slots[i])
+		# ---------- Boots ----------
+		var boots_slot = equip_slot_scene.instantiate()
+		boots_slot.update(character.boots)
+		armor_column.add_child(boots_slot)
 
-			if slot_ui.has_signal("item_changed_slot"):
-				slot_ui.item_changed_slot.connect(_on_equipment_changed.bind(character))
+		# ---------- Weapon ----------
+		var weapon_slot = equip_slot_scene.instantiate()
+		weapon_slot.update(character.weapon)
+		weapon_column.add_child(weapon_slot)
 
 		equipment_columns.add_child(armor_column)
 		equipment_columns.add_child(weapon_column)
@@ -110,7 +99,7 @@ func open() -> void:
 	move_to_front()
 
 	panel.size = Vector2(420, 300)
-	panel.position = Vector2(40, 180)
+	panel.position = Vector2(70, 20)
 
 	list_container.position = Vector2(24, 24)
 	list_container.size = panel.size - Vector2(48, 48)

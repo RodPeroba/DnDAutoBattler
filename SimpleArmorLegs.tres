@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="ArmorData" format=3 uid="uid://cnn5rkp3ecmbf"]
 
 [ext_resource type="Script" uid="uid://dqb6p0yb8th65" path="res://Scripts/DataScripts/ArmorData.gd" id="1_o7pvm"]
+[ext_resource type="Texture2D" uid="uid://d2sqchu50j6b4" path="res://Assets/Armors/wristgear_06.png" id="2_e1plo"]
 
 [resource]
 script = ExtResource("1_o7pvm")
-armorValue = 10
-itemName = "Simple Armor"
+armorValue = 2
+texture = ExtResource("2_e1plo")
+item_type = 3
 metadata/_custom_type_script = "uid://dqb6p0yb8th65"

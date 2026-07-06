@@ -10,7 +10,7 @@ mouse_filter = 2
 script = ExtResource("1_ssyh0")
 equip_slot_scene = ExtResource("2_lkliw")
 
-[node name="Panel" type="Panel" parent="." unique_id=844069209]
+[node name="Panel" type="PanelContainer" parent="." unique_id=1292710309]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -18,14 +18,12 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -325.0
-offset_top = -175.0
+offset_top = -266.0
 offset_right = 325.0
-offset_bottom = 175.0
+offset_bottom = 84.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel" unique_id=19688265]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 2

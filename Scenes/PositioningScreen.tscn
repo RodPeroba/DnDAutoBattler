@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dsvg5roebciuu"]
 
+[ext_resource type="Theme" uid="uid://dfnvyobjw4ntc" path="res://GameTheme.tres" id="1_g7v4k"]
 [ext_resource type="PackedScene" uid="uid://dgj0skyunewuu" path="res://Scenes/BoardView.tscn" id="1_phwps"]
 [ext_resource type="Script" uid="uid://dn5bo4htruh1c" path="res://PositioningScreen.gd" id="1_xe3uy"]
 [ext_resource type="PackedScene" uid="uid://c7carm4ogl83p" path="res://inventory/party_equip_ui.tscn" id="3_okvw1"]
@@ -12,12 +13,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_g7v4k")
 script = ExtResource("1_xe3uy")
 boardView = NodePath("Node2D")
 infoLabel = NodePath("Info")
 confirmButton = NodePath("Button")
 
-[node name="Info" type="Label" parent="." unique_id=1671529467]
+[node name="Title" type="Label" parent="." unique_id=1671529467]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -48,8 +50,29 @@ text = "Iniciar Batalha"
 
 [node name="Inv_UI" parent="." unique_id=975103152 instance=ExtResource("4_g7v4k")]
 layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 160.00006
+offset_top = 6.0
+offset_right = 242.00006
+offset_bottom = 67.0
+grow_horizontal = 2
 
 [node name="Party_Equip_UI" parent="." unique_id=1499645422 instance=ExtResource("3_okvw1")]
 layout_mode = 1
+
+[node name="Info" type="Label" parent="." unique_id=1348925327]
+z_index = 100
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -44.5
+offset_right = 397.0
+offset_bottom = 44.5
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Posicione os personagens"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

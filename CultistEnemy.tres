@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://djailj7gflbkr"]
+
+[ext_resource type="Resource" uid="uid://cnn5rkp3ecmbf" path="res://SimpleArmorHelme.tres" id="1_d0154"]
+[ext_resource type="Script" uid="uid://ib7yp41u5qsn" path="res://EnemyData.gd" id="1_qvl2i"]
+[ext_resource type="Resource" uid="uid://0q0w7361hr3e" path="res://ClericClass.tres" id="2_mt2nq"]
+[ext_resource type="Resource" uid="uid://by3o83fnfan1s" path="res://LightArmorChest.tres" id="3_s7eut"]
+[ext_resource type="Resource" uid="uid://dy8r7khijex0u" path="res://inventory/equipmentinv.tres" id="4_8vplp"]
+[ext_resource type="Resource" uid="uid://ccp0fvcoxaf1b" path="res://LightArmorHelmet.tres" id="5_vqknd"]
+[ext_resource type="Resource" uid="uid://raeulud0hb5j" path="res://LightArmorLegs.tres" id="6_t8ka5"]
+[ext_resource type="Resource" uid="uid://br0ltjsgoypsr" path="res://HumanRace.tres" id="7_8gw15"]
+[ext_resource type="Script" uid="uid://jqc24i724eso" path="res://Scripts/Character.gd" id="8_sjl4w"]
+[ext_resource type="Resource" uid="uid://dab08ssn6pa11" path="res://SpellBook.tres" id="9_wiins"]
+
+[sub_resource type="Resource" id="Resource_u3tet"]
+script = ExtResource("8_sjl4w")
+race = ExtResource("7_8gw15")
+characterClass = ExtResource("2_mt2nq")
+equipment_inv = ExtResource("4_8vplp")
+weapon = ExtResource("9_wiins")
+helmet = ExtResource("5_vqknd")
+chest = ExtResource("3_s7eut")
+legs = ExtResource("6_t8ka5")
+boots = ExtResource("1_d0154")
+metadata/_custom_type_script = "uid://jqc24i724eso"
+
+[resource]
+script = ExtResource("1_qvl2i")
+character = SubResource("Resource_u3tet")
+difficulty = 2
+goldReward = 25
+xpReward = 50
+canAppearFromBattle = 2
+weight = 7
+metadata/_custom_type_script = "uid://ib7yp41u5qsn"

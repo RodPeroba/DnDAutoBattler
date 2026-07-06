@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bmdkiri8u1e3s" path="res://Scripts/DiceTerm.gd" id="1_gbgnc"]
 [ext_resource type="Script" uid="uid://da23nic8i1056" path="res://Scripts/DiceExpression.gd" id="2_650ut"]
 [ext_resource type="Script" uid="uid://btpkyikuscuc" path="res://Scripts/DataScripts/WeaponData.gd" id="3_jbqg4"]
+[ext_resource type="Texture2D" uid="uid://bhpwgsioovt7r" path="res://Assets/bow_02.png" id="4_650ut"]
 
 [sub_resource type="Resource" id="Resource_6tx1x"]
 script = ExtResource("1_gbgnc")
@@ -18,4 +19,6 @@ metadata/_custom_type_script = "uid://da23nic8i1056"
 script = ExtResource("3_jbqg4")
 damage = SubResource("Resource_qogcv")
 rangeDistance = 3
+texture = ExtResource("4_650ut")
+item_type = 5
 metadata/_custom_type_script = "uid://btpkyikuscuc"

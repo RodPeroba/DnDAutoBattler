@@ -1,15 +1,23 @@
 [gd_resource type="Resource" script_class="Character" format=3 uid="uid://dgrk6auv46chk"]
 
-[ext_resource type="Resource" uid="uid://cnn5rkp3ecmbf" path="res://SimpleArmor.tres" id="1_tu4a6"]
+[ext_resource type="Resource" uid="uid://cmp2cfynrerbc" path="res://LightArmorBoots.tres" id="1_o4y5j"]
 [ext_resource type="Resource" uid="uid://pm8e4plfyivp" path="res://WarriorClass.tres" id="2_yj3ot"]
 [ext_resource type="Resource" uid="uid://br0ltjsgoypsr" path="res://HumanRace.tres" id="3_0u34n"]
+[ext_resource type="Resource" uid="uid://by3o83fnfan1s" path="res://LightArmorChest.tres" id="3_fjqlb"]
+[ext_resource type="Resource" uid="uid://dy8r7khijex0u" path="res://inventory/equipmentinv.tres" id="4_fjqlb"]
+[ext_resource type="Resource" uid="uid://ccp0fvcoxaf1b" path="res://LightArmorHelmet.tres" id="4_h02x0"]
 [ext_resource type="Script" uid="uid://jqc24i724eso" path="res://Scripts/Character.gd" id="4_o4y5j"]
 [ext_resource type="Resource" uid="uid://bl4qrekpygcri" path="res://Sword.tres" id="5_fjqlb"]
+[ext_resource type="Resource" uid="uid://raeulud0hb5j" path="res://LightArmorLegs.tres" id="5_j8b1b"]
 
 [resource]
 script = ExtResource("4_o4y5j")
 race = ExtResource("3_0u34n")
 characterClass = ExtResource("2_yj3ot")
+equipment_inv = ExtResource("4_fjqlb")
 weapon = ExtResource("5_fjqlb")
-armor = ExtResource("1_tu4a6")
+helmet = ExtResource("4_h02x0")
+chest = ExtResource("3_fjqlb")
+legs = ExtResource("5_j8b1b")
+boots = ExtResource("1_o4y5j")
 metadata/_custom_type_script = "uid://jqc24i724eso"

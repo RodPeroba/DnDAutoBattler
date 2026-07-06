@@ -94,8 +94,7 @@ func updateStatuses(eventName : String):
 func act():
 	emitEvent("OnTurnStart")
 	
-	if target == null or target.currentHp <= 0:
-		findTarget()
+	findTarget()
 		
 	if target == null:
 		return

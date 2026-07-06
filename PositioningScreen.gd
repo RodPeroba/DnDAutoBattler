@@ -64,12 +64,7 @@ func _input(event):
 		handleTileClick(tile)
 
 func toggle_inventories():
-	if inv_ui == null:
-		print("ERRO: inv_ui está null")
-		return
-
-	if party_equip_ui == null:
-		print("ERRO: party_equip_ui está null")
+	if inv_ui == null or party_equip_ui == null:
 		return
 
 	var should_close = inv_ui.is_open or party_equip_ui.is_open
@@ -81,15 +76,14 @@ func toggle_inventories():
 		inv_ui.open()
 		party_equip_ui.open()
 
+
 		inv_ui.z_index = 200
 		party_equip_ui.z_index = 201
 
 		inv_ui.move_to_front()
 		party_equip_ui.move_to_front()
-
-	print("Inv aberto: ", inv_ui.is_open, " visible: ", inv_ui.visible)
-	print("Equip aberto: ", party_equip_ui.is_open, " visible: ", party_equip_ui.visible)
-
+		
+		
 func handleTileClick(tile : Vector2i):
 
 	# Seleciona personagem
@@ -172,12 +166,9 @@ func updateInfo():
 
 	infoLabel.text = (
 		"Selected: %s\n"
-		+ "Level %d\n"
-		+ "HP %d"
-	) % [
+		+ "Level %d") % [
 		selectedCharacter.characterClass.className,
-		selectedCharacter.level,
-		selectedCharacter.maxHp
+		selectedCharacter.level
 	]
 
 func _on_button_pressed() -> void:

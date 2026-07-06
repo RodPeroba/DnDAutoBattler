@@ -10,35 +10,41 @@ signal item_changed_slot
 
 var slot_data: InvSlot
 
-func update(slot: InvSlot):
+func update(data):
 	get_nodes()
-	
+
 	if item_visual == null:
-		print("ERRO: item_display não encontrado em ", name)
 		return
-	
+
 	if amount_text == null:
-		print("ERRO: Label não encontrada em ", name)
 		return
-	
-	slot_data = slot
-	
-	if slot_data == null or slot_data.item == null:
+
+	var item = null
+
+	if data is InvSlot:
+		slot_data = data
+		item = slot_data.item
+	else:
+		slot_data = null
+		item = data
+
+	if item == null:
 		item_visual.texture = null
 		item_visual.visible = false
-		amount_text.text = ""
 		amount_text.visible = false
+		amount_text.text = ""
 		return
-	
+
 	item_visual.visible = true
-	item_visual.texture = slot_data.item.texture
+	item_visual.texture = item.texture
 	
-	if slot_data.amount > 1:
+
+	if slot_data != null and slot_data.amount > 1:
 		amount_text.visible = true
 		amount_text.text = str(slot_data.amount)
 	else:
-		amount_text.text = ""
 		amount_text.visible = false
+		amount_text.text = ""
 
 
 func _get_drag_data(at_position: Vector2) -> Variant:
