@@ -182,6 +182,8 @@ func attack():
 	if target == null:
 		return
 	
+	GameManager.playAttack(weapon.attackSound)
+	
 	var context = {
 		"target": target,
 		"damage": weapon.rollDamage() + baseDamage

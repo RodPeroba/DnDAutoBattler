@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://brgub35tcckcs"]
 
+[ext_resource type="AudioStream" uid="uid://chwu7yurtndym" path="res://Assets/SpearSound.mp3" id="1_j8sl4"]
 [ext_resource type="Script" uid="uid://bmdkiri8u1e3s" path="res://Scripts/DiceTerm.gd" id="1_ud88r"]
 [ext_resource type="Script" uid="uid://da23nic8i1056" path="res://Scripts/DiceExpression.gd" id="2_b2oln"]
 [ext_resource type="Script" uid="uid://btpkyikuscuc" path="res://Scripts/DataScripts/WeaponData.gd" id="3_j8sl4"]
@@ -19,6 +20,7 @@ metadata/_custom_type_script = "uid://da23nic8i1056"
 script = ExtResource("3_j8sl4")
 damage = SubResource("Resource_4pc4b")
 rangeDistance = 1
+attackSound = ExtResource("1_j8sl4")
 texture = ExtResource("4_b2oln")
 item_type = 5
 metadata/_custom_type_script = "uid://btpkyikuscuc"

@@ -50,6 +50,7 @@ func _input(event):
 		return
 
 	if event.is_action_pressed("i"):
+		GameManager.playButton()
 		toggle_inventories()
 		return
 
@@ -90,7 +91,7 @@ func handleTileClick(tile : Vector2i):
 	for character in GameManager.playerParty.characters:
 
 		if character.position == tile:
-
+			GameManager.playButton()
 			selectedCharacter = character
 			GameManager.selectCharacter(character)
 
@@ -172,4 +173,5 @@ func updateInfo():
 	]
 
 func _on_button_pressed() -> void:
+	GameManager.playButton()
 	GameManager.confirmPositioning()

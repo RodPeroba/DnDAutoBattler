@@ -10,6 +10,11 @@ enum GameState {
 	GAME_OVER
 }
 
+var buttonPlayer := AudioStreamPlayer.new()
+var attackPlayer := AudioStreamPlayer.new()
+var victoryPlayer := AudioStreamPlayer.new()
+
+const MENU_SCREEN = preload("res://Scenes/inicio.tscn")
 const STAGE_SCREEN = preload("res://Scenes/StageScreen.tscn")
 const POSITIONING_SCREEN = preload("res://Scenes/PositioningScreen.tscn")
 const BATTLE_SCREEN = preload("res://Scenes/BattleScreen.tscn")
@@ -45,14 +50,25 @@ var lastGoldReward: int = 0
 var lastXPReward: int = 0
 var lastScoreReward: int = 0
 
+var attackCooldown := 0.0
 
 
 func _ready():
 	randomize()
+	
+	buttonPlayer.stream = preload("res://Assets/ButtonSound.mp3")
+	victoryPlayer.stream = preload("res://Assets/VictorySound.mp3")
 
-	startGame()
+	add_child(buttonPlayer)
+	add_child(attackPlayer)
+	add_child(victoryPlayer)
+	enterMenu()
+
 
 func _process(delta):
+	if attackCooldown > 0:
+		attackCooldown -= delta
+		
 	if currentState != GameState.BATTLE:
 		return
 
@@ -124,6 +140,11 @@ func resetBattleControls():
 	battlePaused = false
 	battleSpeed = 1.0
 	turnTimer = 0.0
+
+func enterMenu():
+	currentState = GameState.MENU
+
+	changeScreen(MENU_SCREEN)
 
 func startGame():
 
@@ -290,7 +311,8 @@ func _onBattleFinished(
 		handleDefeat()
 
 func handleVictory():
-
+	playVictory()
+	
 	battlesWon += 1
 
 	var earnedScore = calculateBattleScore()
@@ -449,3 +471,16 @@ func createBattleCharacters():
 		battleManager.registerCharacter(
 			character
 		)
+
+func playButton():
+	buttonPlayer.play()
+
+func playAttack(sound: AudioStream):
+	if sound == null:
+		return
+	attackPlayer.stop()
+	attackPlayer.stream = sound
+	attackPlayer.play()
+
+func playVictory():
+	victoryPlayer.play()

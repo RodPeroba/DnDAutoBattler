@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://dw0v7h0va1upk"]
 
 [ext_resource type="Script" uid="uid://bmdkiri8u1e3s" path="res://Scripts/DiceTerm.gd" id="1_gbgnc"]
+[ext_resource type="AudioStream" uid="uid://kc3b6uqydcua" path="res://Assets/BowSound.mp3" id="1_jbqg4"]
 [ext_resource type="Script" uid="uid://da23nic8i1056" path="res://Scripts/DiceExpression.gd" id="2_650ut"]
 [ext_resource type="Script" uid="uid://btpkyikuscuc" path="res://Scripts/DataScripts/WeaponData.gd" id="3_jbqg4"]
 [ext_resource type="Texture2D" uid="uid://bhpwgsioovt7r" path="res://Assets/bow_02.png" id="4_650ut"]
@@ -19,6 +20,7 @@ metadata/_custom_type_script = "uid://da23nic8i1056"
 script = ExtResource("3_jbqg4")
 damage = SubResource("Resource_qogcv")
 rangeDistance = 3
+attackSound = ExtResource("1_jbqg4")
 texture = ExtResource("4_650ut")
 item_type = 5
 metadata/_custom_type_script = "uid://btpkyikuscuc"

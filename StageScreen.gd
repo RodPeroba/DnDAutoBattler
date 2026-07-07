@@ -10,3 +10,4 @@ func update_info() -> void:
 
 func _on_button_pressed() -> void:
 	GameManager.enterPositioning()
+	GameManager.playButton()

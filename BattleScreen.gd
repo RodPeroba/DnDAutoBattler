@@ -108,9 +108,11 @@ func _onLogAdded(
 
 func _on_pause_pressed() -> void:
 	GameManager.togglePause()
+	GameManager.playButton()
 	updateButtons()
 
 
 func _on_speed_pressed() -> void:
 	GameManager.cycleBattleSpeed()
+	GameManager.playButton()
 	updateButtons()
